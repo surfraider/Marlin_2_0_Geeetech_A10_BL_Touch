@@ -1925,7 +1925,7 @@
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing.
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-#if HAS_BED_PROBE 
+#if ANY (FMP, BLTOUCH, PINDA)
 #define Z_SAFE_HOMING
   #define Z_SAFE_HOMING_X_POINT X_CENTER    // X point for Z homing when homing all axes (G28).
   #define Z_SAFE_HOMING_Y_POINT Y_CENTER    // Y point for Z homing when homing all axes (G28).
