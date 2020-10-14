@@ -200,7 +200,7 @@
    #define CUSTOMX true // true/false to change direction
    #define CUSTOMY true // true/false to change direction
    #define CUSTOMZ true // true/false to change direction
-   #define INVERTE      // enabled false / disabed true to change direction
+   #define INVERTE      // enabled = false / disabed = true - to change direction
 
 #endif
 
@@ -236,7 +236,9 @@
 //Used to switch the default board of the model selected in step 1
 //#define CUSTOMBOARD // Enable Custom Board
 #if ENABLED (CUSTOMBOARD)
-  #define MOTHERBOARD BOARD_BTT_SKR_V1_4  // CTRL+Click to jump to board list & also set the correct default_env in platfomio.ini
+  #define MOTHERBOARD BOARD_BTT_SKR_V1_4  // Board Select CTRL+Click to jump to board list & also set the correct default_env in platfomio.ini
+  #define SERIAL_PORT 0    // Serial port 1
+  #define SERIAL_PORT_2 -1 // Serial port 2
 #endif
 
 //Framework for adding a new printer to this config

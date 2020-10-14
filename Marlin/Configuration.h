@@ -117,6 +117,7 @@
 #elif ANY (BEAR, BEAR_TURBO)
   #define SERIAL_PORT 0
   #define SERIAL_PORT_2 -1
+#elif ENABLED (CUSTOMBOARD)  
 #else 
   #define SERIAL_PORT 0
   #define SERIAL_PORT_2 -1  
