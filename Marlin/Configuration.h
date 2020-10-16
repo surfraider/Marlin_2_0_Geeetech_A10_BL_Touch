@@ -20,7 +20,6 @@
  *
  */
 #pragma once
-//configuration.h & configuration_adv.h are only for advanced users you should only be looking at Start_here.h
 
 /**
  * Configuration.h
@@ -73,11 +72,16 @@
 // Author info of this build printed to the host during boot and M115
 #define STRING_CONFIG_H_AUTHOR "(Vertabreaker)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
-#define SHORT_BUILD_VERSION "Bugfix Build 500"
-#define CUSTOM_MACHINE_NAME "3D Printer"
 
-//(Setup) enable 1 model/frame
-//----------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#define SHORT_BUILD_VERSION "Bugfix Build 500"
+
+//-------------------------------
+//(Setup) enable 1 model/frame  |
+//-------------------------------
+
 //GT2560 Boards - vscode: default_envs = mega2560 in platformio.ini
 
 //#define GTA10       // A10 & Variants
@@ -196,10 +200,6 @@
 //(Bear & Bear_Turbo)XY mod pick only 1 or none for stock
 //#define GREYBEAR    // XY 0.9 stepper
 
-//-----------------------------------------------------------------------------------------------------
-//END Setup
-//----------------------------------------------------------------------------------------------------
-
 //---------------
 //Hardware Mods | Assuming you have not installed any additional mods you can skip everything past this line.
 //---------------
@@ -283,6 +283,7 @@
 //------------------------------
 //Optional settings & features |
 //------------------------------
+
 //Note 1000bytes of ram should remain for system stability.
 
 //Optional features
@@ -311,9 +312,7 @@
 //Framework for adding a new printer to this config
 //#define NEWMODEL // New model
 
-//-----------------------------
-//logic to reduce setup steps | 
-//-----------------------------
+//----------------------------------------------------------------------------------------------------
 
 //Multiextruder 
 #if ANY(MIX, MIXT, CYCLOPS, CYCLOPST, DUALEX, TRIEX)
@@ -330,7 +329,6 @@
   #define DIRECTDRIVE
 #endif
 
-//Board types----------------------------------------------------------------------
 //32bit boards models
 #if ANY(GTA30, GTE180, GTM201, GTD200, BEAR, BREAR_TURBO, CUSTOMBOARD)
   #define MCU32
@@ -345,7 +343,8 @@
 #if ENABLED (ENDER3) && DISABLED (CUSTOMBOARD)
   #define AT1280
 #endif
-//----------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------------
 
 //Bed clip logic - use mesh inset or min probe edge to avoid clips not both
 #if ENABLED (BEDCLIPS)
@@ -362,68 +361,6 @@
   //#define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
 #endif
 
-//Probe offset logic - suggest you mesure yours and adjust as needed. 
-#if DISABLED (MULTIEXTRUDER) && ANY(TOUCHPROBE, FMP) && ANY (GTA10, GTA20)
-  #define NOZZLE_TO_PROBE_OFFSET { -38, 5, 0 } // Nozzle To Probe offset XYZ A10/A20 - this is what it is on my test machines yours could differ 
-#elif ENABLED (MULTIEXTRUDER) && ANY(TOUCHPROBE, FMP) && ANY (GTA10, GTA20)
-  #define NOZZLE_TO_PROBE_OFFSET { -40, 0, 0 }  // Nozzle To Probe offset XYZ A10M+T/A20M+T - this is what it is on my test machines yours could differ
-#elif ANY (BEAR, BEAR_TURBO) && ENABLED (TOUCHPROBE)
-  #define NOZZLE_TO_PROBE_OFFSET { 26, 10, 0 } 
-#elif ANY (BEAR, BEAR_TURBO)
-  #define NOZZLE_TO_PROBE_OFFSET { 23, 5, 0 }  
-#else
-  #define NOZZLE_TO_PROBE_OFFSET { 0, 0, 0 }
-#endif
-
-//Bed offset logic - distance from endstop to bed, nozzle on front left bed edge should = X0 Y0
-#if  ANY (GTA10, GTA20, GTA30) && ANY(MIXT, CYCLOPST, CYCLOPST)
-  #define X_MIN_POS -1   //- this is what it is on my test machines yours could differ
-  #define Y_MIN_POS -7   //- this is what it is on my test machines yours could differ
-#elif ANY (GTA10, GTA20, GTA30)
-  #define X_MIN_POS -10  //- this is what it is on my test machines yours could differ
-  #define Y_MIN_POS -5   //- this is what it is on my test machines yours could differ
-#elif ANY (BEAR, BEAR_TURBO)
-  #define X_MIN_POS 0
-  #define Y_MIN_POS -4  
-#elif ENABLED (NEWMODEL) 
-  #define X_MIN_POS 0        
-  #define Y_MIN_POS 0  
-#else
-  #define X_MIN_POS 0        
-  #define Y_MIN_POS 0      
-#endif
-
-//Steps selection logic
-#if DISABLED (NEWMODEL)
-#if DISABLED (MULTIEXTRUDER) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
-  #define DEFAULT_AXIS_STEPS_PER_UNIT  { 80, 80, 400, 95 }  // ungeared extruder found on a10/a20/a30/i3pro
-  //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 95 } 
-  //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 2560, 95 } // M8 Z rod steps 2560 found on old I3pro
-#elif ENABLED (MULTIEXTRUDER) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
-  #define DEFAULT_AXIS_STEPS_PER_UNIT  { 80, 80, 400, 430 } // geared extruder found on M & T variants
-  //#define DEFAULT_AXIS_STEPS_PER_UNIT  { 80, 80, 800, 430 } 
-  //#define DEFAULT_AXIS_STEPS_PER_UNIT  { 80, 80, 2560, 430 } // M8 Z rod steps 2560 found on old I3pro 
-#endif
-
-#if ENABLED (GREYBEAR) && ENABLED (BMG18) && ANY (BEAR, BEAR_TURBO) 
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 200, 200, 400, 830 }  // BMG1.8 + grey
-#elif ENABLED (BMG18) && ANY (BEAR, BEAR_TURBO)  
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 830 }  // BMG1.8
-#elif ENABLED (GREYBEAR) && ENABLED (BMG9) && ANY (BEAR, BEAR_TURBO)
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 200, 200, 400, 1660 }  // BMG 0.9 +grey
-#elif ENABLED (BMG9) && ANY (BEAR, BEAR_TURBO) 
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 1660 }  // BMG 0.9
-#elif ENABLED (GREYBEAR) && ANY (BEAR, BEAR_TURBO) 
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 200, 200, 400, 280 }  // stock + grey  
-#elif ANY (BEAR, BEAR_TURBO) 
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 280 }  //stock
-#endif
-#endif
-
-#if ENABLED (NEWMODEL) 
-  #define DEFAULT_AXIS_STEPS_PER_UNIT  { 80, 80, 400, 95 }
-#endif
-
 //Motor direction logic - Not used if CUSTOMDRIVERS enabled
 #if ENABLED (TMCCHIPS) && DISABLED (MULTIEXTRUDER) || DISABLED (TMCCHIPS) && ENABLED (MULTIEXTRUDER)
   #define INVERTE     // (E direction False) comment out to disabe if wrong direction for (E direction true) - Geared exturders invert E (stock)
@@ -437,6 +374,9 @@
 #else
   //#define INVERTXYZ // Enable to force on 
 #endif
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
 
 /**
  * *** VENDORS PLEASE READ ***
@@ -538,7 +478,7 @@
 #endif
 
 // Name displayed in the LCD "Ready" message and Info menu
-//#define CUSTOM_MACHINE_NAME "3D Printer"  //defined else where
+#define CUSTOM_MACHINE_NAME "3D Printer" 
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like http://www.uuidgenerator.net/version4
@@ -1500,7 +1440,35 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 98 } // defined else where
+#if DISABLED (NEWMODEL)
+#if DISABLED (MULTIEXTRUDER) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
+  #define DEFAULT_AXIS_STEPS_PER_UNIT  { 80, 80, 400, 95 }  // ungeared extruder found on a10/a20/a30/i3pro
+  //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 95 } 
+  //#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 2560, 95 } // M8 Z rod steps 2560 found on old I3pro
+#elif ENABLED (MULTIEXTRUDER) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
+  #define DEFAULT_AXIS_STEPS_PER_UNIT  { 80, 80, 400, 430 } // geared extruder found on M & T variants
+  //#define DEFAULT_AXIS_STEPS_PER_UNIT  { 80, 80, 800, 430 } 
+  //#define DEFAULT_AXIS_STEPS_PER_UNIT  { 80, 80, 2560, 430 } // M8 Z rod steps 2560 found on old I3pro 
+#endif
+
+#if ENABLED (GREYBEAR) && ENABLED (BMG18) && ANY (BEAR, BEAR_TURBO) 
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 200, 200, 400, 830 }  // BMG1.8 + grey
+#elif ENABLED (BMG18) && ANY (BEAR, BEAR_TURBO)  
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 830 }  // BMG1.8
+#elif ENABLED (GREYBEAR) && ENABLED (BMG9) && ANY (BEAR, BEAR_TURBO)
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 200, 200, 400, 1660 }  // BMG 0.9 +grey
+#elif ENABLED (BMG9) && ANY (BEAR, BEAR_TURBO) 
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 1660 }  // BMG 0.9
+#elif ENABLED (GREYBEAR) && ANY (BEAR, BEAR_TURBO) 
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 200, 200, 400, 280 }  // stock + grey  
+#elif ANY (BEAR, BEAR_TURBO) 
+    #define DEFAULT_AXIS_STEPS_PER_UNIT   { 100, 100, 400, 280 }  //stock
+#endif
+#endif
+
+#if ENABLED (NEWMODEL) 
+  #define DEFAULT_AXIS_STEPS_PER_UNIT  { 80, 80, 400, 95 }
+#endif
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1749,7 +1717,17 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-//#define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 } //defined else where
+#if DISABLED (MULTIEXTRUDER) && ANY(TOUCHPROBE, FMP) && ANY (GTA10, GTA20)
+  #define NOZZLE_TO_PROBE_OFFSET { -38, 5, 0 } // Nozzle To Probe offset XYZ A10/A20 - this is what it is on my test machines yours could differ 
+#elif ENABLED (MULTIEXTRUDER) && ANY(TOUCHPROBE, FMP) && ANY (GTA10, GTA20)
+  #define NOZZLE_TO_PROBE_OFFSET { -40, 0, 0 }  // Nozzle To Probe offset XYZ A10M+T/A20M+T - this is what it is on my test machines yours could differ
+#elif ANY (BEAR, BEAR_TURBO) && ENABLED (TOUCHPROBE)
+  #define NOZZLE_TO_PROBE_OFFSET { 26, 10, 0 } 
+#elif ANY (BEAR, BEAR_TURBO)
+  #define NOZZLE_TO_PROBE_OFFSET { 23, 5, 0 }  
+#else
+  #define NOZZLE_TO_PROBE_OFFSET { 0, 0, 0 }
+#endif
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -2018,6 +1996,23 @@
   #define X_BED_SIZE 200
   #define Y_BED_SIZE 200
   #define Z_MAX_POS  200 
+#endif
+
+#if  ANY (GTA10, GTA20, GTA30) && ANY(MIXT, CYCLOPST, CYCLOPST)
+  #define X_MIN_POS -1   //- this is what it is on my test machines yours could differ
+  #define Y_MIN_POS -7   //- this is what it is on my test machines yours could differ
+#elif ANY (GTA10, GTA20, GTA30)
+  #define X_MIN_POS -10  //- this is what it is on my test machines yours could differ
+  #define Y_MIN_POS -5   //- this is what it is on my test machines yours could differ
+#elif ANY (BEAR, BEAR_TURBO)
+  #define X_MIN_POS 0
+  #define Y_MIN_POS -4  
+#elif ENABLED (NEWMODEL) 
+  #define X_MIN_POS 0        
+  #define Y_MIN_POS 0  
+#else
+  #define X_MIN_POS 0        
+  #define Y_MIN_POS 0      
 #endif
 
 #define Z_MIN_POS 0

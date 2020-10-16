@@ -20,7 +20,6 @@
  *
  */
 #pragma once
-//configuration.h & configuration_adv.h are only for advanced users you should only be looking at Start_here.h
 
 /**
  * Configuration_adv.h
