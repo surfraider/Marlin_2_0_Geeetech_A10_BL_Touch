@@ -2,7 +2,7 @@
 
 This fork contains my personal version of marlin 2.0
 
-At this time there is little difference between my fork and upstream other then my configuration files (configuration.h, configuration_adv.h, start_here.h).
+At this time there is little difference between my fork and upstream other then my configuration files (configuration.h, configuration_adv.h).
 
 ## Building Marlin 2.0
 
