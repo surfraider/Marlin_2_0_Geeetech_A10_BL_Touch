@@ -4,20 +4,6 @@ This fork contains my personal version of marlin 2.0
 
 At this time there is little difference between my fork and upstream other then my configuration files (configuration.h, configuration_adv.h, start_here.h).
 
-Youtube  https://youtube.com/verta
-
-Discord  https://discord.gg/kv5kCw6
-
-Donate   https://ko-fi.com/vertshobbies
-
-Patreon   https://www.patreon.com/vertshobbies
-
-# Contributed Code 
-
-Upstream: https://github.com/MarlinFirmware/Marlin/commits?author=vertabreak
-
-Configs: https://github.com/MarlinFirmware/Configurations/commits?author=vertabreak
-
 ## Building Marlin 2.0
 
 To build Marlin 2.0 you'll need [PlatformIO](https://docs.platformio.org/en/latest/ide.html#platformio-ide).

@@ -2,13 +2,6 @@
 #define SHORT_BUILD_VERSION "Bugfix Build 499"
 #define CUSTOM_MACHINE_NAME "3D Printer"
 
-// Ctrl+click to open links
-// Youtube             "https://youtube.com/verta"
-// Discord             "https://discord.gg/kv5kCw6"
-// GitHub              "https://github.com/Vertabreak/Marlin"
-// Donate              "https://ko-fi.com/vertshobbies"
-// Patreon             "https://www.patreon.com/vertshobbies"
-
 //(Setup) enable 1 model/frame
 //----------------------------------------------------------------------------------------------------
 //GT2560 Boards - vscode: default_envs = mega2560 in platformio.ini
