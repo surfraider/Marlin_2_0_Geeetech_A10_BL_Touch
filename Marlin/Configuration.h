@@ -177,23 +177,29 @@
 //----------------------------------------------------------------------------------------------------
 //Based on https://github.com/codiac2600/SKR-MK3s-V1.4-Beta
 //SKR 1.4 Boards - vscode: default_envs = #default_envs = LPC1768
+
 //#define BEAR        // Bear MK3/MK3s & Variants - tesing
 
 //vscode: default_envs = #default_envs = LPC1769
+
 //#define BEAR_TURBO  // Bear MK3/MK3s Turbo & Variants - testing
 
 //(Bear & Bear_Turbo)Switch from Bear MK3 to MK2.5 
+
 //#define MK25        // Enable to set 12V for Bear MK2.5
 
 //(Bear & Bear_Turbo)Z mod pick only 1 or none for stock
+
 //#define Z320        // Enable to change Zmax to 320  
 //#define Z420        // Enable to change Zmax to 420 
 
 //(Bear & Bear_Turbo)Extruder mod pick only 1 or none for stock
+
 //#define BMG18       // BMG E 1.8 stepper
 //#define BMG9        // BMG E 0.9 stepper
 
 //(Bear & Bear_Turbo)XY mod pick only 1 or none for stock
+
 //#define GREYBEAR    // XY 0.9 stepper
 
 //---------------
@@ -201,16 +207,19 @@
 //---------------
 
 //(Probe Mod) enable 1 (Mod) probe type none = manual (stock) - No GTM32 probe support yet
+
 //#define TOUCHPROBE  // Enable Touch Type Probe (Bltouch / 3Dtouch)
 //#define FMP         // Enable Fixed Mounted Type Probe (Capacitive / Inductive)
 //#define PINDA       // Enable Pinda Type Probe
 
 //Probe settings
+
 //#define HEATERACCURACY   // Disable heaters while probing - May effect accuracy +-
 //#define HALFSPEED        // Reduce probing speed by 50% = 120 - May effect accuracy +-
 //#define DOUBLESPEED      // Raise probing speed by 100% = 480 - May effect accuracy +-
 
 //(Multi Extruder Mods) These can be added to any model assuming you added the hardware to make use of it.
+
 //#define MIX      // Enable Mixing    2 in 1 - 1 Virtual Stepper (M)
 //#define MIXT     // Enable Mixing    3 in 1 - 1 Virtual Stepper (T)
 //#define CYCLOPS  // Enable Cyclops   2 in 1 - 2 Physical Stepper (C) 
@@ -219,6 +228,7 @@
 //#define TRIEX    // 3 Extruders      3 in 3 - 3 Physical Stepper (E)
 
 //(Driver Mods) enable 1 (MOD) driver type or none for (Stock/A4988)
+
 //#define A5984      // Enable A5984   all drivers
 //#define DRV8825    // Enable DRV8825 all drivers
 //#define LV8729     // Enable LV8729  all drivers
@@ -236,6 +246,7 @@
 //#define TMC5160S   // Enable TMC5160 Standalone all drivers
 
 // Physical setup required soldering/wiring for UART/SPI.
+
 //#define TMC2208U   // Enable TMC2208 UART/SPI all drivers
 //#define TMC2209U   // Enable TMC2209 UART/SPI all drivers
 //#define TMC2130U   // Enable TMC2130 UART/SPI all drivers
@@ -246,6 +257,7 @@
 //#define TMC5160U   // Enable TMC5160 UART/SPI all drivers
 
 //Custom driver set if none selected above
+
 //#define CUSTOMDRIVERS     // Define Custom driver set and direction 
 #if ENABLED (CUSTOMDRIVERS) //(Not used unless CUSTOMDRTIVERS is enabled)
    //'A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160'
@@ -269,10 +281,12 @@
 #endif
 
 //(LCD Mod) enable 1 (Mod) to override default LCD as defined by step 1
+
 //#define FULLGFXLCD      // Enable repreap full gfx lcd
 //#define CR10DISPLAY     // Enable cr10 style lcd
 
 //(Fan Mod) enable 1 (Mod) to override default FAN PWM
+
 //#define MECHFAN     // Enable Mechatronics fan 80 pwm
 //#define RADIALFAN   // Enable Radial fan 50 pwm
 //#define BEAR_FAN    // Enable fan 20 pwm on when not a bear model 
@@ -284,6 +298,7 @@
 //Note 1000bytes of ram should remain for system stability.
 
 //Optional features
+
 //#define PLR              // Enabled power loss resume - Only functions from SDcard
 //#define RUNOUT           // Enable filament runout sensor - Only If you have them and want to use them
 //#define BEDCLIPS         // Enable to avoid bed clips (manual or probe) - Only If you have them and want to use them
@@ -295,10 +310,12 @@
 //#define MESHVALIDATE     // Enable G26 mesh validation does not work well in my testing
 
 //Disable to save resources on hardware you dont use
+
 //#define NOSCREEN         // Disable the screen - Save alot of resources good for octoprint users
 //#define NOSDCARD         // Disable the sdcard slot - Save alot of resources good for octoprint users 
 
 //Used to switch the default board of the model selected in step 1
+
 //#define CUSTOMBOARD // Enable Custom Board
 #if ENABLED (CUSTOMBOARD)
   #define MOTHERBOARD BOARD_BTT_SKR_V1_4  // Board Select CTRL+Click to jump to board list & also set the correct default_env in platfomio.ini
@@ -307,6 +324,7 @@
 #endif
 
 //Framework for adding a new printer to this config
+
 //#define NEWMODEL // New model
 
 //----------------------------------------------------------------------------------------------------
@@ -1779,7 +1797,7 @@
 #define Z_PROBE_OFFSET_RANGE_MAX  20 
 
 // Enable the M48 repeatability test to test probe accuracy
-#if ANY(BLTOUCH, FIX_MOUNTED_PROBE, TOUCH_MI_PROBE, SOLENOID_PROBE, RACK_AND_PINION_PROBE, NOZZLE_AS_PROBE)
+#if ANY(BLTOUCH, FIX_MOUNTED_PROBE, TOUCH_MI_PROBE, SOLENOID_PROBE, RACK_AND_PINION_PROBE, NOZZLE_AS_PROBE) && DISABLED (AT1280)
   #define Z_MIN_PROBE_REPEATABILITY_TEST
 #endif
 
@@ -2035,7 +2053,7 @@
   #define MAX_SOFTWARE_ENDSTOP_Z
 #endif
 
-#if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS)
+#if EITHER(MIN_SOFTWARE_ENDSTOPS, MAX_SOFTWARE_ENDSTOPS) && DISABLED (AT1280)
   #define SOFT_ENDSTOPS_MENU_ITEM  // Enable/Disable software endstops from the LCD 
 #endif
 
@@ -2114,9 +2132,9 @@
   #define AUTO_BED_LEVELING_BILINEAR  
 #endif
 
-#if DISABLED (AT1280)
+#if ENABLED (AUTO_BED_LEVELING_UBL)
   #define GRIDSIZE 5   // Mesh grid size adjust as needed
-#else
+#elif ENABLED (AUTO_BED_LEVELING_BILINEAR)
   #define GRIDSIZE 3   // Mesh grid size adjust as needed
 #endif
 
@@ -2621,8 +2639,7 @@
  * just remove some extraneous menu items to recover space.
  */
 //#define NO_LCD_MENUS
-#if DISABLED (AT1280)
-#else
+#if ENABLED (AT1280)
   #define SLIM_LCD_MENUS   //removes most advanced configuration menus
 #endif
 

@@ -367,12 +367,14 @@
  * Hotend Idle Timeout
  * Prevent filament in the nozzle from charring and causing a critical jam.
  */
+#if DISABLED (AT1280)
 #define HOTEND_IDLE_TIMEOUT
 #if ENABLED(HOTEND_IDLE_TIMEOUT)
   #define HOTEND_IDLE_TIMEOUT_SEC (10*60)    // (seconds) Time without extruder movement to trigger protection
   #define HOTEND_IDLE_MIN_TRIGGER   150     // (°C) Minimum temperature to enable hotend protection
   #define HOTEND_IDLE_NOZZLE_TARGET   0     // (°C) Safe temperature for the nozzle after timeout
   #define HOTEND_IDLE_BED_TARGET      0     // (°C) Safe temperature for the bed after timeout
+#endif
 #endif
 
 // @section temperature
@@ -811,7 +813,7 @@
 //
 // Add the G35 command to read bed corners to help adjust screws. Requires a bed probe.
 //
-#if ENABLED (TOUCHPROBE) || ENABLED (FMP) || ENABLED (PINDA)
+#if DISABLED (AT1280) && HAS_BED_PROBE || ENABLED (BLTOUCH)
   #define ASSISTED_TRAMMING
 #endif
 
@@ -1086,25 +1088,14 @@
 
 #if HAS_LCD_MENU
 
-
   // Include a page of printer information in the LCD Main Menu 
-#if DISABLED (AT1280) && HAS_BED_PROBE || ENABLED (BLTOUCH)
+#if HAS_BED_PROBE || ENABLED (BLTOUCH) && DISABLED (AT1280)
   #define LCD_INFO_MENU
   // Add Probe Z Offset calibration to the Z Probe Offsets menu
-  #if HAS_BED_PROBE || ENABLED (BLTOUCH)
     #define PROBE_OFFSET_WIZARD
     #if ENABLED(PROBE_OFFSET_WIZARD)
-      #define PROBE_OFFSET_START 0   // Estimated nozzle-to-probe Z offset, plus a little extra
+      #define PROBE_OFFSET_START -1   // Estimated nozzle-to-probe Z offset, plus a little extra
     #endif
-  #endif
-
-  // Include a page of printer information in the LCD Main Menu
-#if DISABLED (AT1280)  
-  #define LCD_INFO_MENU
-    #if ENABLED(LCD_INFO_MENU)
-    //#define LCD_PRINTER_INFO_IS_BOOTSCREEN // Show bootscreen(s) instead of Printer Info pages
-    #endif
-  #endif
 #endif
 
   // BACK menu items keep the highlight at the top
