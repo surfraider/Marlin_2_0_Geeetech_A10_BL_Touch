@@ -177,7 +177,6 @@
 //----------------------------------------------------------------------------------------------------
 //Based on https://github.com/codiac2600/SKR-MK3s-V1.4-Beta
 //SKR 1.4 Boards - vscode: default_envs = #default_envs = LPC1768
-
 //#define BEAR        // Bear MK3/MK3s & Variants - tesing
 
 //vscode: default_envs = #default_envs = LPC1769
@@ -328,8 +327,8 @@
 #endif
 
 //32bit boards models
-#if ANY(GTA30, GTE180, GTM201, GTD200, BEAR, BREAR_TURBO, CUSTOMBOARD)
-  #define MCU32
+#if ANY(GTA30, GTE180, GTM201, GTD200)
+  #define STM32
 #endif
 
 //256kb boards models
@@ -406,7 +405,7 @@
  *
  * :[-1, 0, 1, 2, 3, 4, 5, 6, 7]
  */
-#if ENABLED (MCU32) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
+#if ENABLED (STM32)
   #define SERIAL_PORT 1
   //#define SERIAL_PORT_2 2
 #elif ANY(AT2560, AT1280)
@@ -486,9 +485,9 @@
 
 // This defines the number of extruders
 // :[0, 1, 2, 3, 4, 5, 6, 7, 8]
-#if ENABLED (CYCLOPST) || ENABLED (TRIEX)
+#if ANY (CYCLOPST, TRIEX)
   #define EXTRUDERS 3
-#elif ENABLED (CYCLOPS) || ENABLED (DUALEX)
+#elif ANY (CYCLOPS, DUALEX)
   #define EXTRUDERS 2
 #else
   #define EXTRUDERS 1
@@ -646,7 +645,7 @@
  *   - This implementation supports up to two mixing extruders.
  *   - Enable DIRECT_MIXING_IN_G1 for M165 and mixing in G1 (from Pia Taubert's reference implementation).
  */
-#if ENABLED (MIX) || ENABLED (MIXT) 
+#if ANY (MIX, MIXT) 
   #define MIXING_EXTRUDER 
   #define MIXING_VIRTUAL_TOOLS 8   // Use the Virtual Tool method with M163 and M164
   #define DIRECT_MIXING_IN_G1      // Allow ABCDHI mix factors in G1 movement commands
@@ -663,7 +662,7 @@
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
-#if ENABLED (DULEX) || ENABLED (TRIEX)
+#if ANY (DUALEX. TRIEX)
   #define HOTEND_OFFSET_X { 0.0, 32.00 } // (mm) relative X-offset for each nozzle
 #endif
 //#define HOTEND_OFFSET_Y { 0.0, 5.00 }  // (mm) relative Y-offset for each nozzle
@@ -862,7 +861,7 @@
   //#define PID_DEBUG             // Sends debug data to the serial port.
   //#define PID_OPENLOOP 1        // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
   //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
-  #if ENABLED (DULEX) || ENABLED (TRIEX)
+  #if ANY (DUALEX, TRIEX)
     #define PID_PARAMS_PER_HOTEND   // Uses separate PID parameters for each extruder (useful for mismatched extruders)
   #endif
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
@@ -1617,7 +1616,7 @@
  */
 #if ENABLED (TOUCHPROBE)
   #define BLTOUCH
-#elif ENABLED (FMP) || ENABLED (PINDA)
+#elif ANY (FMP, PINDA)
   #define FIX_MOUNTED_PROBE
 #else
   #define PROBE_MANUALLY
@@ -2051,22 +2050,17 @@
   #define FILAMENT_RUNOUT_SENSOR 
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
    
-   #if ENABLED (MIXT) || ENABLED (CYCLOPST) || ENABLED (TRIEX)
+   #if ANY (MIXT, CYCLOPST, TRIEX) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
    #define NUM_RUNOUT_SENSORS   3
-   #if DISABLED (BEAR) && DISABLED (BEAR_TURBO)
    #define FIL_RUNOUT_PIN      66
    #define FIL_RUNOUT2_PIN     67
    #define FIL_RUNOUT3_PIN     68
-   #endif
-   #elif ENABLED (MIX) || ENABLED (CYCLOPS) || ENABLED (DUELEX)
+   #elif ANY (MIX, CYCLOPS, DUELEX) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
    #define NUM_RUNOUT_SENSORS   2
-   #if DISABLED (BEAR) && DISABLED (BEAR_TURBO)
    #define FIL_RUNOUT_PIN      66
    #define FIL_RUNOUT2_PIN     67
-   #endif
-   #else
+   #elif DISABLED (BEAR) && DISABLED (BEAR_TURBO)
    #define NUM_RUNOUT_SENSORS   1
-   #if DISABLED (BEAR) && DISABLED (BEAR_TURBO)
    #define FIL_RUNOUT_PIN      66
    #endif
    #endif
@@ -2091,7 +2085,6 @@
     // large enough to avoid false positives.)
     //#define FILAMENT_MOTION_SENSOR
   #endif
-#endif
 #endif
 
 //===========================================================================
@@ -2599,7 +2592,7 @@
  */
 #if DISABLED (NOSDCARD)
   #define SDSUPPORT
-#if ENABLED (MCU32) && ENABLED (SDSUPPORT) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
+#if ENABLED (STM32) && ENABLED (SDSUPPORT)
   #define SDIO_SUPPORT
 #endif
 #endif
@@ -2869,7 +2862,7 @@
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
 #if DISABLED (NOSCREEN)
-  #if ENABLED (GTA20) || ENABLED (FULLGFXLCD)
+  #if ANY (GTA20, FULLGFXLCD)
     #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
     #define ST7920_DELAY_1 DELAY_NS(200)
     #define ST7920_DELAY_2 DELAY_NS(200)
@@ -2877,7 +2870,7 @@
  #elif ENABLED (NEWMODEL) // Screen type & SDcard support
   //#define REPRAP_DISCOUNT_SMART_CONTROLLER
   //#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
- #elif ENABLED (ENDER3) || ENABLED (CR10DISPLAY)
+ #elif ANY (ENDER3, CR10DISPLAY)
    #define CR10_STOCKDISPLAY
  #else //A10 - I3pro
   #define REPRAP_DISCOUNT_SMART_CONTROLLER

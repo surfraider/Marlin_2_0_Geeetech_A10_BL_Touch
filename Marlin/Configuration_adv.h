@@ -341,14 +341,12 @@
 // before a min_temp_error is triggered. (Shouldn't be more than 10.)
 #if DISABLED (AT1280)
   #define MAX_CONSECUTIVE_LOW_TEMPERATURE_ERROR_ALLOWED 10
-#endif
 
 // The number of milliseconds a hotend will preheat before starting to check
 // the temperature. This value should NOT be set to the time it takes the
 // hot end to reach the target temperature, but the time it takes to reach
 // the minimum temperature your thermistor can read. The lower the better/safer.
 // This shouldn't need to be more than 30 seconds (30000)
-#if DISABLED (AT1280)
   #define MILLISECONDS_PREHEAT_TIME 30000
 #endif
 
@@ -829,7 +827,7 @@
   #define TRAMMING_POINT_NAME_4 "Back-Left"
 
   #define RESTORE_LEVELING_AFTER_G35    // Enable to restore leveling setup after operation
-  //#define REPORT_TRAMMING_MM          // Report Z deviation (mm) for each point relative to the first
+  #define REPORT_TRAMMING_MM          // Report Z deviation (mm) for each point relative to the first
   #define ASSISTED_TRAMMING_MENU_ITEM // Add a menu item for Assisted Tramming
 
   /**
@@ -838,7 +836,7 @@
    *   M4: 40 = Clockwise, 41 = Counter-Clockwise
    *   M5: 50 = Clockwise, 51 = Counter-Clockwise
    */
-  #define TRAMMING_SCREW_THREAD 40
+  #define TRAMMING_SCREW_THREAD 30
 
 #endif
 
@@ -1090,13 +1088,13 @@
 
 
   // Include a page of printer information in the LCD Main Menu 
-#if DISABLED (AT1280) && HAS_BED_PROBE
+#if DISABLED (AT1280) && HAS_BED_PROBE || ENABLED (BLTOUCH)
   #define LCD_INFO_MENU
   // Add Probe Z Offset calibration to the Z Probe Offsets menu
-  #if HAS_BED_PROBE
+  #if HAS_BED_PROBE || ENABLED (BLTOUCH)
     #define PROBE_OFFSET_WIZARD
     #if ENABLED(PROBE_OFFSET_WIZARD)
-      #define PROBE_OFFSET_START -4.0   // Estimated nozzle-to-probe Z offset, plus a little extra
+      #define PROBE_OFFSET_START 0   // Estimated nozzle-to-probe Z offset, plus a little extra
     #endif
   #endif
 
@@ -1259,8 +1257,7 @@
    *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
    *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
    */
-  #if ENABLED (MCU32)
-  #define SDCARD_SORT_ALPHA
+  //#define SDCARD_SORT_ALPHA
 
   // SD Card Sorting options
   #if ENABLED(SDCARD_SORT_ALPHA)
@@ -1274,12 +1271,9 @@
     #define SDSORT_CACHE_VFATS 2      // Maximum number of 13-byte VFAT entries to use for sorting.
                                       // Note: Only affects SCROLL_LONG_FILENAMES with SDSORT_CACHE_NAMES but not SDSORT_DYNAMIC_RAM.
   #endif
-  #endif
 
   // This allows hosts to request long names for files and folders with M33
-  #if ENABLED (MCU32)
-    #define LONG_FILENAME_HOST_SUPPORT
-  #endif
+  //#define LONG_FILENAME_HOST_SUPPORT
 
   // Enable this option to scroll long filenames in the SD card menu
   #define SCROLL_LONG_FILENAMES
@@ -1653,7 +1647,7 @@
     #endif
   #endif
     //#define BABYSTEP_DISPLAY_TOTAL          // Display total babysteps since last G28
-  #if HAS_BED_PROBE
+  #if HAS_BED_PROBE || ENABLED (BLTOUCH)
       #define BABYSTEP_ZPROBE_OFFSET          // Combine M851 Z and Babystepping
   #endif
   #if ENABLED(BABYSTEP_ZPROBE_OFFSET)
@@ -1831,8 +1825,7 @@
 //
 // G2/G3 Arc Support
 //
-#if ENABLED (MCU32)
-  #define ARC_SUPPORT             // Disable this feature to save ~3226 bytes  //8bit cant handle
+//#define ARC_SUPPORT             // Disable this feature to save ~3226 bytes  //8bit cant handle
 #if ENABLED(ARC_SUPPORT)
   #define MM_PER_ARC_SEGMENT      1 // (mm) Length (or minimum length) of each arc segment
   //#define ARC_SEGMENTS_PER_R    1 // Max segment length, MM_PER = Min
@@ -1845,8 +1838,8 @@
 #endif
 
 // Support for G5 with XYZE destination and IJPQ offsets. Requires ~2666 bytes.
-#define BEZIER_CURVE_SUPPORT                              //8bit cant handle.
-#endif
+//#define BEZIER_CURVE_SUPPORT                              //8bit cant handle.
+
 /**
  * Direct Stepping
  *
@@ -1930,12 +1923,7 @@
 // The number of linear motions that can be in the plan at any give time.
 // THE BLOCK_BUFFER_SIZE NEEDS TO BE A POWER OF 2 (e.g. 8, 16, 32) because shifts and ors are used to do the ring-buffering.
 #define BLOCK_BUFFER_SIZE BUFSIZE // SD,LCD,Buttons take more memory, block buffer needs to be smaller'
-
-#if ENABLED (MCU32)
-  #define BUFSIZE 32     // buffer
-#else
-  #define BUFSIZE 16     // buffer
-#endif  
+#define BUFSIZE 16     // buffer
 
 // @section serial
 
@@ -3307,11 +3295,11 @@
 #if ENABLED (MIX)
 // Full Set of 8 Vtools for mix
   #define STARTUP_COMMANDS "M163 S0 P0\nM163 S1 P1\nM164 S1\nM163 S0 P0.50\nM163 S1 P0.50\nM164 S2\nM163 S0 P0.75\nM163 S1 P0.25\nM164 S3\nM163 S0 P0.25\nM163 S1 P0.75\nM164 S4\nM163 S0 P0.33\nM163 S1 P0.67\nM164 S5\nM163 S0 P0.67\nM163 S1 P0.33\nM164 S6\nM163 S0 P0.60\nM163 S1 P0.40\nM164 S7\nM163 S0 P1\nM163 S1 P0\nM164 S0"
-#endif
-
-#if ENABLED (MIXT)
+#elif ENABLED (MIXT)
 // Full Set of 8 vtools for mixt
   #define STARTUP_COMMANDS "M163 S0 P0\nM163 S1 P1\nM163 S2 P0\nM164 S1\nM163 S0 P0\nM163 S1 P0\nM163 S2 P1\nM164 S2\nM163 S0 P0.33\nM163 S1 P0.33\nM163 S2 P0.34\nM164 S3\nM163 S0 P0.25\nM163 S1 P0.75\nM163 S2 P0\nM164 S4\nM163 S0 P0\nM163 S1 P0.75\nM163 S2 P0.25\nM164 S5\nM163 S0 P0\nM163 S1 P0.50\nM163 S2 P0.50\nM164 S6\nM163 S0 P0.50\nM163 S1 P0.50\nM163 S2 P0\nM164 S7\nM163 S0 P1\nM163 S1 P0\nM163 S2 P0\nM164 S0"
+#else
+  //#define STARTUP_COMMANDS ""
 #endif
 
 /**
