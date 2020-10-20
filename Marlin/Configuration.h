@@ -72,16 +72,13 @@
 // Author info of this build printed to the host during boot and M115
 #define STRING_CONFIG_H_AUTHOR "(Vertabreaker)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------
-//-------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #define SHORT_BUILD_VERSION "Bugfix Build 500"
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------
 //(Setup) enable 1 model/frame  |
 //-------------------------------
-
 //GT2560 Boards - vscode: default_envs = mega2560 in platformio.ini
 
 //#define GTA10       // A10 & Variants
@@ -201,7 +198,7 @@
 //#define GREYBEAR    // XY 0.9 stepper
 
 //---------------
-//Hardware Mods | Assuming you have not installed any additional mods you can skip everything past this line.
+//Hardware Mods | Assuming you have not installed any additional mods you can skip everything in this section.
 //---------------
 
 //(Probe Mod) enable 1 (Mod) probe type none = manual (stock) - No GTM32 probe support yet
@@ -222,7 +219,7 @@
 //#define DUALEX   // 2 Extruders      2 in 2 - 2 Physical Stepper (D) 
 //#define TRIEX    // 3 Extruders      3 in 3 - 3 Physical Stepper (E)
 
-//(Driver Mods) enable 1 (MOD) driver type or none for (Stock)
+//(Driver Mods) enable 1 (MOD) driver type or none for (Stock/A4988)
 //#define A5984      // Enable A5984   all drivers
 //#define DRV8825    // Enable DRV8825 all drivers
 //#define LV8729     // Enable LV8729  all drivers
@@ -239,6 +236,7 @@
 //#define TMC5130S   // Enable TMC5130 Standalone all drivers
 //#define TMC5160S   // Enable TMC5160 Standalone all drivers
 
+// Physical setup required soldering/wiring for UART/SPI.
 //#define TMC2208U   // Enable TMC2208 UART/SPI all drivers
 //#define TMC2209U   // Enable TMC2209 UART/SPI all drivers
 //#define TMC2130U   // Enable TMC2130 UART/SPI all drivers
@@ -344,20 +342,20 @@
   #define AT1280
 #endif
 
-//----------------------------------------------------------------------------------------------------
-
 //Bed clip logic - use mesh inset or min probe edge to avoid clips not both
 #if ENABLED (BEDCLIPS)
   #define MESH_INSET 10   // Move mesh in #mm from edge
+  //Set per side
   //#define MESH_MIN_X MESH_INSET
   //#define MESH_MIN_Y MESH_INSET
-  //#define MESH_MAX_X X_BED_SIZE - (MESH_INSET) - 40 //PROBE OFFSET X - Workaround for preventing exceeding Max X in some cases
+  //#define MESH_MAX_X X_BED_SIZE - (MESH_INSET)
   //#define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
 #else
   #define MESH_INSET 0    // Move mesh in #mm from edge
+  //Set per side
   //#define MESH_MIN_X MESH_INSET
   //#define MESH_MIN_Y MESH_INSET
-  //#define MESH_MAX_X X_BED_SIZE - (MESH_INSET) - 40 //PROBE OFFSET X - Workaround for preventing exceeding Max X in some cases
+  //#define MESH_MAX_X X_BED_SIZE - (MESH_INSET)
   //#define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
 #endif
 
@@ -423,7 +421,7 @@
 #elif ENABLED (CUSTOMBOARD)  
 #else 
   #define SERIAL_PORT 0
-  #define SERIAL_PORT_2 -1  
+  //#define SERIAL_PORT_2 -1  
 #endif
 
 /**
@@ -473,7 +471,7 @@
 #elif ENABLED (NEWMODEL) //Replace NEW MODEL with real name
   #define MOTHERBOARD BOARD_RAMPS_14_EFB   // define new models mainboard
 #else
-  #error No model/frame selected in start_here.h setup
+  #error No model/frame selected in setup.
  #endif 
 #endif
 
@@ -501,7 +499,7 @@
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 #if ENABLED(CYCLOPS) || ENABLED (CYCLOPST)
   #define SINGLENOZZLE
-    //#define SINGLENOZZLE_STANDBY_TEMP
+    #define SINGLENOZZLE_STANDBY_TEMP
   //#define SINGLENOZZLE_STANDBY_FAN
 #endif
 
@@ -679,9 +677,8 @@
  * Enable and connect the power supply to the PS_ON_PIN.
  * Specify whether the power supply is active HIGH or active LOW.
  */
-#if ENABLED (DIRECTDRIVE)
-  #define PSU_CONTROL
-  #define PSU_NAME "Power Supply"
+  //#define PSU_CONTROL
+  //#define PSU_NAME "Power Supply"
 
 #if ENABLED(PSU_CONTROL)
   #define PSU_ACTIVE_STATE LOW      // Set 'LOW' for ATX, 'HIGH' for X-Box
@@ -699,7 +696,6 @@
     //#define AUTO_POWER_CHAMBER_TEMP  30 // (°C) Turn on PSU over this temperature
     #define POWER_TIMEOUT 30
   #endif
-#endif
 #endif
 
 //===========================================================================
@@ -835,11 +831,7 @@
 // Above this temperature the heater will be switched off.
 // This can protect components from overheating, but NOT from shorts and failures.
 // (Use MINTEMP for thermistor short/failure protection.)
-#if ANY (BEAR, BEAR_TURBO)
-#define MAXHOTENDTEMP 275  // Max hotend temp 275
-#else
 #define MAXHOTENDTEMP 260  // Max hotend temp 260
-#endif
 
 #define HEATER_0_MAXTEMP (MAXHOTENDTEMP + 15)
 #define HEATER_1_MAXTEMP (MAXHOTENDTEMP + 15)
@@ -1196,7 +1188,7 @@
    #define X_DRIVER_TYPE  TMC2130_STANDALONE
    #define Y_DRIVER_TYPE  TMC2130_STANDALONE
    #define Z_DRIVER_TYPE  TMC2130_STANDALONE
-   #define Z2_DRIVER_TYPE  TMC2130_STANDALONE
+   #define Z2_DRIVER_TYPE TMC2130_STANDALONE
    #define E0_DRIVER_TYPE TMC2130_STANDALONE
    #define E1_DRIVER_TYPE TMC2130_STANDALONE
    #define E2_DRIVER_TYPE TMC2130_STANDALONE
@@ -1206,7 +1198,7 @@
    #define X_DRIVER_TYPE  TMC2160_STANDALONE
    #define Y_DRIVER_TYPE  TMC2160_STANDALONE
    #define Z_DRIVER_TYPE  TMC2160_STANDALONE
-   #define Z2_DRIVER_TYPE  TMC2160_STANDALONE
+   #define Z2_DRIVER_TYPE TMC2160_STANDALONE
    #define E0_DRIVER_TYPE TMC2160_STANDALONE
    #define E1_DRIVER_TYPE TMC2160_STANDALONE
    #define E2_DRIVER_TYPE TMC2160_STANDALONE
@@ -1216,7 +1208,7 @@
    #define X_DRIVER_TYPE  TMC26X_STANDALONE
    #define Y_DRIVER_TYPE  TMC26X_STANDALONE
    #define Z_DRIVER_TYPE  TMC26X_STANDALONE
-   #define Z2_DRIVER_TYPE  TMC26X_STANDALONE
+   #define Z2_DRIVER_TYPE TMC26X_STANDALONE
    #define E0_DRIVER_TYPE TMC26X_STANDALONE
    #define E1_DRIVER_TYPE TMC26X_STANDALONE
    #define E2_DRIVER_TYPE TMC26X_STANDALONE
@@ -1226,7 +1218,7 @@
    #define X_DRIVER_TYPE  TMC2660_STANDALONE
    #define Y_DRIVER_TYPE  TMC2660_STANDALONE
    #define Z_DRIVER_TYPE  TMC2660_STANDALONE
-   #define Z2_DRIVER_TYPE  TMC2660_STANDALONE
+   #define Z2_DRIVER_TYPE TMC2660_STANDALONE
    #define E0_DRIVER_TYPE TMC2660_STANDALONE
    #define E1_DRIVER_TYPE TMC2660_STANDALONE
    #define E2_DRIVER_TYPE TMC2660_STANDALONE
@@ -1236,7 +1228,7 @@
    #define X_DRIVER_TYPE  TMC5130_STANDALONE
    #define Y_DRIVER_TYPE  TMC5130_STANDALONE
    #define Z_DRIVER_TYPE  TMC5130_STANDALONE
-   #define Z2_DRIVER_TYPE  TMC5130_STANDALONE
+   #define Z2_DRIVER_TYPE TMC5130_STANDALONE
    #define E0_DRIVER_TYPE TMC5130_STANDALONE
    #define E1_DRIVER_TYPE TMC5130_STANDALONE
    #define E2_DRIVER_TYPE TMC5130_STANDALONE
@@ -1246,7 +1238,7 @@
    #define X_DRIVER_TYPE  TMC5160_STANDALONE
    #define Y_DRIVER_TYPE  TMC5160_STANDALONE
    #define Z_DRIVER_TYPE  TMC5160_STANDALONE
-   #define Z2_DRIVER_TYPE  TMC5160_STANDALONE
+   #define Z2_DRIVER_TYPE TMC5160_STANDALONE
    #define E0_DRIVER_TYPE TMC5160_STANDALONE
    #define E1_DRIVER_TYPE TMC5160_STANDALONE
    #define E2_DRIVER_TYPE TMC5160_STANDALONE
@@ -1256,7 +1248,7 @@
   #define X_DRIVER_TYPE  TMC2208
   #define Y_DRIVER_TYPE  TMC2208
   #define Z_DRIVER_TYPE  TMC2208
-  #define Z2_DRIVER_TYPE  TMC2208
+  #define Z2_DRIVER_TYPE TMC2208
   #define E0_DRIVER_TYPE TMC2208
   #define E1_DRIVER_TYPE TMC2208
   #define E2_DRIVER_TYPE TMC2208
@@ -1276,7 +1268,7 @@
    #define X_DRIVER_TYPE  TMC2130
    #define Y_DRIVER_TYPE  TMC2130
    #define Z_DRIVER_TYPE  TMC2130
-   #define Z2_DRIVER_TYPE  TMC2130
+   #define Z2_DRIVER_TYPE TMC2130
    #define E0_DRIVER_TYPE TMC2130
    #define E1_DRIVER_TYPE TMC2130
    #define E2_DRIVER_TYPE TMC2130
@@ -1286,7 +1278,7 @@
    #define X_DRIVER_TYPE  TMC2160
    #define Y_DRIVER_TYPE  TMC2160
    #define Z_DRIVER_TYPE  TMC2160
-   #define Z2_DRIVER_TYPE  TMC2160
+   #define Z2_DRIVER_TYPE TMC2160
    #define E0_DRIVER_TYPE TMC2160
    #define E1_DRIVER_TYPE TMC2160
    #define E2_DRIVER_TYPE TMC2160
@@ -1296,7 +1288,7 @@
    #define X_DRIVER_TYPE  TMC26X
    #define Y_DRIVER_TYPE  TMC26X
    #define Z_DRIVER_TYPE  TMC26X
-   #define Z2_DRIVER_TYPE  TMC26X
+   #define Z2_DRIVER_TYPE TMC26X
    #define E0_DRIVER_TYPE TMC26X
    #define E1_DRIVER_TYPE TMC26X
    #define E2_DRIVER_TYPE TMC26X
@@ -1306,7 +1298,7 @@
    #define X_DRIVER_TYPE  TMC2660
    #define Y_DRIVER_TYPE  TMC2660
    #define Z_DRIVER_TYPE  TMC2660
-   #define Z2_DRIVER_TYPE  TMC2660
+   #define Z2_DRIVER_TYPE TMC2660
    #define E0_DRIVER_TYPE TMC2660
    #define E1_DRIVER_TYPE TMC2660
    #define E2_DRIVER_TYPE TMC2660
@@ -1316,7 +1308,7 @@
    #define X_DRIVER_TYPE  TMC5130
    #define Y_DRIVER_TYPE  TMC5130
    #define Z_DRIVER_TYPE  TMC5130
-   #define Z2_DRIVER_TYPE  TMC5130
+   #define Z2_DRIVER_TYPE TMC5130
    #define E0_DRIVER_TYPE TMC5130
    #define E1_DRIVER_TYPE TMC5130
    #define E2_DRIVER_TYPE TMC5130
@@ -1326,7 +1318,7 @@
    #define X_DRIVER_TYPE  TMC5160
    #define Y_DRIVER_TYPE  TMC5160
    #define Z_DRIVER_TYPE  TMC5160
-   #define Z2_DRIVER_TYPE  TMC5160
+   #define Z2_DRIVER_TYPE TMC5160
    #define E0_DRIVER_TYPE TMC5160
    #define E1_DRIVER_TYPE TMC5160
    #define E2_DRIVER_TYPE TMC5160
@@ -1336,7 +1328,7 @@
    #define X_DRIVER_TYPE  DRV8825
    #define Y_DRIVER_TYPE  DRV8825
    #define Z_DRIVER_TYPE  DRV8825
-   #define Z2_DRIVER_TYPE  DRV8825
+   #define Z2_DRIVER_TYPE DRV8825
    #define E0_DRIVER_TYPE DRV8825
    #define E1_DRIVER_TYPE DRV8825
    #define E2_DRIVER_TYPE DRV8825
@@ -1346,7 +1338,7 @@
    #define X_DRIVER_TYPE  A5984
    #define Y_DRIVER_TYPE  A5984
    #define Z_DRIVER_TYPE  A5984
-   #define Z2_DRIVER_TYPE  A5984
+   #define Z2_DRIVER_TYPE A5984
    #define E0_DRIVER_TYPE A5984
    #define E1_DRIVER_TYPE A5984
    #define E2_DRIVER_TYPE A5984
@@ -1356,7 +1348,7 @@
    #define X_DRIVER_TYPE  LV8729
    #define Y_DRIVER_TYPE  LV8729
    #define Z_DRIVER_TYPE  LV8729
-   #define Z2_DRIVER_TYPE  LV8729
+   #define Z2_DRIVER_TYPE LV8729
    #define E0_DRIVER_TYPE LV8729
    #define E1_DRIVER_TYPE LV8729
    #define E2_DRIVER_TYPE LV8729
@@ -1366,7 +1358,7 @@
    #define X_DRIVER_TYPE  L6470
    #define Y_DRIVER_TYPE  L6470
    #define Z_DRIVER_TYPE  L6470
-   #define Z2_DRIVER_TYPE  L6470
+   #define Z2_DRIVER_TYPE L6470
    #define E0_DRIVER_TYPE L6470
    #define E1_DRIVER_TYPE L6470
    #define E2_DRIVER_TYPE L6470
@@ -1376,7 +1368,7 @@
    #define X_DRIVER_TYPE  TB6560
    #define Y_DRIVER_TYPE  TB6560
    #define Z_DRIVER_TYPE  TB6560
-   #define Z2_DRIVER_TYPE  TB6560
+   #define Z2_DRIVER_TYPE TB6560
    #define E0_DRIVER_TYPE TB6560
    #define E1_DRIVER_TYPE TB6560
    #define E2_DRIVER_TYPE TB6560
@@ -1386,7 +1378,7 @@
    #define X_DRIVER_TYPE  TB6600
    #define Y_DRIVER_TYPE  TB6600
    #define Z_DRIVER_TYPE  TB6600
-   #define Z2_DRIVER_TYPE  TB6600
+   #define Z2_DRIVER_TYPE TB6600
    #define E0_DRIVER_TYPE TB6600
    #define E1_DRIVER_TYPE TB6600
    #define E2_DRIVER_TYPE TB6600
@@ -1408,8 +1400,8 @@
  *
  * :[2,3,4,5,6,7]
  */
-#if DISABLED (TMC2209U) && DISABLED (TMC2130U) && DISABLED (TMC2160U) && DISABLED (TMC2660U) && DISABLED (TMC5130U) && DISABLED (TMC5160U)
-#define ENDSTOP_NOISE_THRESHOLD 2
+#if DISABLED (TMC2208U, TMC2209U, TMC2130U, TMC2160U, TMC26XU, TMC2660U, TMC5130U, TMC5160U)
+  #define ENDSTOP_NOISE_THRESHOLD 2
 #endif
 
 // Check for stuck or disconnected endstops during homing moves.
