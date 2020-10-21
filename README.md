@@ -1,8 +1,6 @@
 # Marlin 2 3D Printer Firmware
 
-This fork contains my personal version of marlin 2.0
-
-At this time there is little difference between my fork and upstream other then my configuration files (configuration.h, configuration_adv.h).
+There is no difference with upstream besides configuration (configuration.h, configuration_adv.h).
 
 ## Building Marlin 2.0
 
@@ -10,14 +8,12 @@ To build Marlin 2.0 you'll need [PlatformIO](https://docs.platformio.org/en/late
 
 ## Credits
 
-The current Marlin dev team consists of:
-
- - Scott Lahteine [[@thinkyhead](https://github.com/thinkyhead)] - USA
- - Roxanne Neufeld [[@Roxy-3D](https://github.com/Roxy-3D)] - USA
- - Chris Pepper [[@p3p](https://github.com/p3p)] - UK
- - Bob Kuhn [[@Bob-the-Kuhn](https://github.com/Bob-the-Kuhn)] - USA
- - João Brazio [[@jbrazio](https://github.com/jbrazio)] - Portugal
- - Erik van der Zalm [[@ErikZalm](https://github.com/ErikZalm)] - Netherlands
+ - Scott Lahteine [[@thinkyhead](https://github.com/thinkyhead)]
+ - Roxanne Neufeld [[@Roxy-3D](https://github.com/Roxy-3D)]
+ - Chris Pepper [[@p3p](https://github.com/p3p)]
+ - Bob Kuhn [[@Bob-the-Kuhn](https://github.com/Bob-the-Kuhn)]
+ - João Brazio [[@jbrazio](https://github.com/jbrazio)]
+ - Erik van der Zalm [[@ErikZalm](https://github.com/ErikZalm)]
  
 ## License
 
