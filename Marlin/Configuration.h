@@ -295,7 +295,7 @@
 //Optional settings & features |
 //------------------------------
 
-//Note 1000bytes of ram should remain for system stability.
+//Note 1kb of ram should remain for system stability.
 
 //Optional features
 
@@ -474,7 +474,7 @@
   #define MOTHERBOARD BOARD_GT2560_REV_A_PLUS
 #elif ENABLED (MECREATOR2)
   #define MOTHERBOARD BOARD_GT2560_V3_MC2
-#elif ENABLED (GTA30) || ENABLED (GTD200)
+#elif ANY (GTA30, GTD200)
   #define MOTHERBOARD BOARD_GTM32_MINI_A30
 #elif ENABLED (GTE180) 
   #define MOTHERBOARD BOARD_GTM32_MINI
@@ -515,7 +515,7 @@
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
-#if ENABLED(CYCLOPS) || ENABLED (CYCLOPST)
+#if ANY (CYCLOPS, CYCLOPST)
   #define SINGLENOZZLE
     #define SINGLENOZZLE_STANDBY_TEMP
   //#define SINGLENOZZLE_STANDBY_FAN
@@ -972,7 +972,7 @@
     #define  DEFAULT_bedKp 129.40
     #define  DEFAULT_bedKi 25.07
     #define  DEFAULT_bedKd 166.96
-  #elif ENABLED (GTA30) || ENABLED (GTD200)
+  #elif ANY (GTA30, GTD200)
     #define  DEFAULT_bedKp 369.610
     #define  DEFAULT_bedKi 54.132
     #define  DEFAULT_bedKd 602.870

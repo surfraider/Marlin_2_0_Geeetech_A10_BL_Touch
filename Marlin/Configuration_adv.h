@@ -1089,7 +1089,7 @@
 #if HAS_LCD_MENU
 
   // Include a page of printer information in the LCD Main Menu 
-#if HAS_BED_PROBE || ENABLED (BLTOUCH) && DISABLED (AT1280)
+#if DISABLED (AT1280) && HAS_BED_PROBE || ENABLED (BLTOUCH) 
   #define LCD_INFO_MENU
   // Add Probe Z Offset calibration to the Z Probe Offsets menu
     #define PROBE_OFFSET_WIZARD
