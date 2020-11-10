@@ -543,7 +543,7 @@ void CardReader::openFileRead(char * const path, const uint8_t subcall_type/*=0*
   switch (subcall_type) {
     case 0:      // Starting a new print. "Now fresh file: ..."
       announceOpen(2, path);
-      file_subcall_ctr = 0;
+      TERN_(HAS_MEDIA_SUBCALLS, file_subcall_ctr = 0);
       break;
 
     #if HAS_MEDIA_SUBCALLS
@@ -611,7 +611,7 @@ void CardReader::openFileWrite(char * const path) {
   if (!isMounted()) return;
 
   announceOpen(2, path);
-  file_subcall_ctr = 0;
+  TERN_(HAS_MEDIA_SUBCALLS, file_subcall_ctr = 0);
 
   endFilePrint();
 
