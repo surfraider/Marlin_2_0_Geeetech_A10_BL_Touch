@@ -818,11 +818,11 @@
 #define DUMMY_THERMISTOR_998_VALUE 25
 #define DUMMY_THERMISTOR_999_VALUE 100
 
-// Resistor values when using a MAX31865 (sensor -5)
-// Sensor value is typically 100 (PT100) or 1000 (PT1000)
-// Calibration value is typically 430 ohm for AdaFruit PT100 modules and 4300 ohm for AdaFruit PT1000 modules.
-//#define MAX31865_SENSOR_OHMS      100
-//#define MAX31865_CALIBRATION_OHMS 430
+// Resistor values when using MAX31865 sensors (-5) on TEMP_SENSOR_0 / 1
+//#define MAX31865_SENSOR_OHMS_0      100   // (Ω) Typically 100 or 1000 (PT100 or PT1000)
+//#define MAX31865_CALIBRATION_OHMS_0 430   // (Ω) Typically 430 for AdaFruit PT100; 4300 for AdaFruit PT1000
+//#define MAX31865_SENSOR_OHMS_1      100
+//#define MAX31865_CALIBRATION_OHMS_1 430
 
 // Use temp sensor 1 as a redundant sensor with sensor 0. If the readings
 // from the two sensors differ too much the print will be aborted.
@@ -2104,6 +2104,24 @@
    #define FIL_RUNOUT_STATE  HIGH     // set to high to invert the logic of the sensors. some geeetech filament sensors are inverted if trigger with filament loaded invert.
    #define FIL_RUNOUT_PULLUP          // Use internal pullup for filament runout pins.
    //#define FIL_RUNOUT_PULLDOWN      // Use internal pulldown for filament runout pins.
+
+  // Override individually if the runout sensors vary
+  //#define FIL_RUNOUT1_STATE LOW
+  //#define FIL_RUNOUT1_PULL
+  //#define FIL_RUNOUT2_STATE LOW
+  //#define FIL_RUNOUT2_PULL
+  //#define FIL_RUNOUT3_STATE LOW
+  //#define FIL_RUNOUT3_PULL
+  //#define FIL_RUNOUT4_STATE LOW
+  //#define FIL_RUNOUT4_PULL
+  //#define FIL_RUNOUT5_STATE LOW
+  //#define FIL_RUNOUT5_PULL
+  //#define FIL_RUNOUT6_STATE LOW
+  //#define FIL_RUNOUT6_PULL
+  //#define FIL_RUNOUT7_STATE LOW
+  //#define FIL_RUNOUT7_PULL
+  //#define FIL_RUNOUT8_STATE LOW
+  //#define FIL_RUNOUT8_PULL
 
   // Set one or more commands to execute on filament runout.
   // (After 'M412 H' Marlin will ask the host to handle the process.)
