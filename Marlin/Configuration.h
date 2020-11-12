@@ -2102,8 +2102,7 @@
 
    #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
    #define FIL_RUNOUT_STATE  HIGH     // set to high to invert the logic of the sensors. some geeetech filament sensors are inverted if trigger with filament loaded invert.
-   #define FIL_RUNOUT_PULLUP          // Use internal pullup for filament runout pins.
-   //#define FIL_RUNOUT_PULLDOWN      // Use internal pulldown for filament runout pins.
+   #define FIL_RUNOUT_PULL          // Use internal pullup for filament runout pins.
 
   // Override individually if the runout sensors vary
   //#define FIL_RUNOUT1_STATE LOW

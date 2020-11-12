@@ -1189,7 +1189,7 @@
   //#define SD_DETECT_STATE HIGH
 
   //#define SD_IGNORE_AT_STARTUP            // Don't mount the SD card when starting up
-  //#define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
+  
   #if DISABLED (PLR)
     #define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
   #endif
