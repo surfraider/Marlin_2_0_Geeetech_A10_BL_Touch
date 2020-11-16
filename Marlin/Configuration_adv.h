@@ -653,7 +653,6 @@
 
   // Default action to execute following M605 mode change commands. Typically G28X to apply new mode.
   //#define EVENT_GCODE_IDEX_AFTER_MODECHANGE "G28X"
-#endif
 
 #endif // DUAL_X_CARRIAGE
 
