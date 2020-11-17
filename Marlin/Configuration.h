@@ -220,11 +220,16 @@
 
 //(Multi Extruder Mods) These can be added to any model assuming you added the hardware to make use of it.
 
-//#define MIX      // Enable Mixing    2 in 1 - 1 Virtual Stepper (M)
-//#define MIXT     // Enable Mixing    3 in 1 - 1 Virtual Stepper (T)
-//#define CYCLOPS  // Enable Cyclops   2 in 1 - 2 Physical Stepper (C) 
-//#define CYCLOPST // Enable Cyclops   3 in 1 - 3 Physical Stepper (CT)
-//#define DUALEX   // 2 Extruders      2 in 2 - 2 Physical Stepper (D) 
+//Either Mix or cyclops can be used on M variants 
+//#define MIX      // Enable Mixing     2 in 1 - 1 Virtual Extruder
+//#define CYCLOPS  // Enable Cyclops    2 in 1 - 2 Physical Extruder 
+
+//Either Mix T or Cyclops T can be used on T variants 
+//#define MIXT     // Enable Mixing T   3 in 1 - 1 Virtual Extruder
+//#define CYCLOPST // Enable Cyclops T  3 in 1 - 3 Physical Extruder
+
+//Intended for use with D variants
+//#define DUALEX   // 2 Extruders       2 in 2 - 2 Physical Extruder & 2 Nozzles
 
 //(Driver Mods) enable 1 (MOD) driver type or none for (Stock/A4988)
 
