@@ -225,7 +225,6 @@
 //#define CYCLOPS  // Enable Cyclops   2 in 1 - 2 Physical Stepper (C) 
 //#define CYCLOPST // Enable Cyclops   3 in 1 - 3 Physical Stepper (CT)
 //#define DUALEX   // 2 Extruders      2 in 2 - 2 Physical Stepper (D) 
-//#define TRIEX    // 3 Extruders      3 in 3 - 3 Physical Stepper (E)
 
 //(Driver Mods) enable 1 (MOD) driver type or none for (Stock/A4988)
 
@@ -330,7 +329,7 @@
 //----------------------------------------------------------------------------------------------------
 
 //Multiextruder 
-#if ANY(MIX, MIXT, CYCLOPS, CYCLOPST, DUALEX, TRIEX)
+#if ANY(MIX, MIXT, CYCLOPS, CYCLOPST, DUALEX)
   #define MULTIEXTRUDER 
 #endif
 
@@ -504,7 +503,7 @@
 
 // This defines the number of extruders
 // :[0, 1, 2, 3, 4, 5, 6, 7, 8]
-#if ANY (CYCLOPST, TRIEX)
+#if ENABLED (CYCLOPST)
   #define EXTRUDERS 3
 #elif ANY (CYCLOPS, DUALEX)
   #define EXTRUDERS 2
@@ -681,7 +680,7 @@
 // Offset of the extruders (uncomment if using more than one and relying on firmware to position when changing).
 // The offset has to be X=0, Y=0 for the extruder 0 hotend (default extruder).
 // For the other hotends it is their distance from the extruder 0 hotend.
-#if ANY (DUALEX. TRIEX)
+#if ANY (DUALEX)
   #define HOTEND_OFFSET_X { 0.0, 32.00 } // (mm) relative X-offset for each nozzle
 #endif
 //#define HOTEND_OFFSET_Y { 0.0, 5.00 }  // (mm) relative Y-offset for each nozzle
@@ -795,11 +794,7 @@
   #define TEMP_SENSOR_1 5
 #endif
 
-#if ENABLED (TRIEX)
-  #define TEMP_SENSOR_1 5
-  #define TEMP_SENSOR_2 5
-#endif
-
+#define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
 #define TEMP_SENSOR_5 0
@@ -884,7 +879,7 @@
   //#define PID_DEBUG             // Sends debug data to the serial port.
   //#define PID_OPENLOOP 1        // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
   //#define SLOW_PWM_HEATERS      // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
-  #if ANY (DUALEX, TRIEX)
+  #if ENABLED (DUALEX)
     #define PID_PARAMS_PER_HOTEND   // Uses separate PID parameters for each extruder (useful for mismatched extruders)
   #endif
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
@@ -2085,7 +2080,7 @@
   #define FILAMENT_RUNOUT_SENSOR 
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
    
-   #if ANY (MIXT, CYCLOPST, TRIEX) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
+   #if ANY (MIXT, CYCLOPST) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
    #define NUM_RUNOUT_SENSORS   3
    #define FIL_RUNOUT_PIN      66
    #define FIL_RUNOUT2_PIN     67
