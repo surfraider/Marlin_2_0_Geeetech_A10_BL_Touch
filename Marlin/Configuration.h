@@ -72,7 +72,7 @@
 // Author info of this build printed to the host during boot and M115
 #define STRING_CONFIG_H_AUTHOR "(Vertabreaker)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
-#define SHORT_BUILD_VERSION "Bugfix Build 500"
+#define SHORT_BUILD_VERSION "Bugfix Build 501"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1754,18 +1754,18 @@
 #endif
 
 // X and Y axis travel speed (mm/m) between probes
-#define XY_PROBE_SPEED HOMING_FEEDRATE_XY
+#define XY_PROBE_SPEED 10*60
 
 // Feedrate (mm/m) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_SPEED_FAST Z_PROBE_SPEED_SLOW
 
 // Feedrate (mm/m) for the "accurate" probe of each point
 #if ENABLED (HALFSPEED)
-  #define Z_PROBE_SPEED_SLOW (HOMING_FEEDRATE_Z/2)  // 120 Probe speed reduce if accuracy is poor
+  #define Z_PROBE_SPEED_SLOW (2*60)  // 120 Probe speed reduce if accuracy is poor
 #elif ENABLED (DOUBLESPEED)
-  #define Z_PROBE_SPEED_SLOW (HOMING_FEEDRATE_Z*2)  // 480 Probe speed raise if accuracy is poor
+  #define Z_PROBE_SPEED_SLOW (8*60)  // 480 Probe speed raise if accuracy is poor
 #else
-  #define Z_PROBE_SPEED_SLOW HOMING_FEEDRATE_Z      // 240 Probe speed reduce/raise if accuracy is poor
+  #define Z_PROBE_SPEED_SLOW (4*60)  // 240 Probe speed reduce/raise if accuracy is poor
 #endif
 
 /**
@@ -2190,7 +2190,7 @@
  * these options to restore the prior leveling state or to always enable
  * leveling immediately after G28.
  */
-//#define RESTORE_LEVELING_AFTER_G28
+#define RESTORE_LEVELING_AFTER_G28
 //#define ENABLE_LEVELING_AFTER_G28
 
 /**
@@ -2365,9 +2365,7 @@
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (HOMING_FEEDRATE_Z * 10)   //40*60
-#define HOMING_FEEDRATE_Z  (BASE_HOMING_FEEDRATE * 4) //4*60
-#define BASE_HOMING_FEEDRATE 60
+#define HOMING_FEEDRATE_MM_M { (10*60), (10*60), (4*60) }
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -2485,8 +2483,8 @@
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
   #define NOZZLE_PARK_POINT { X_MIN_POS, Y_BED_SIZE , 20 }
-  #define NOZZLE_PARK_XY_FEEDRATE (HOMING_FEEDRATE_XY / 60)    // (mm/s) X and Y axes feedrate (also used for delta Z axis)
-  #define NOZZLE_PARK_Z_FEEDRATE  (HOMING_FEEDRATE_Z / 60)     // (mm/s) Z axis feedrate (not used for delta printers)
+  #define NOZZLE_PARK_XY_FEEDRATE (10*60)    // (mm/s) X and Y axes feedrate (also used for delta Z axis)
+  #define NOZZLE_PARK_Z_FEEDRATE  (4*60)     // (mm/s) Z axis feedrate (not used for delta printers)
 #endif
 
 /**

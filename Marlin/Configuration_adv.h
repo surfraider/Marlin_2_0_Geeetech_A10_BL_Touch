@@ -2129,7 +2129,7 @@
   //#define TOOLCHANGE_PARK
   #if ENABLED(TOOLCHANGE_PARK)
     #define TOOLCHANGE_PARK_XY    { X_MIN_POS + 0, Y_MIN_POS + 0 }
-    #define TOOLCHANGE_PARK_XY_FEEDRATE HOMING_FEEDRATE_XY  // (mm/m)
+    #define TOOLCHANGE_PARK_XY_FEEDRATE (10*60)  // (mm/m)
   #endif
 #endif // HAS_MULTI_EXTRUDER
 
