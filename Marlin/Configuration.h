@@ -141,14 +141,14 @@
 //----------------------------------------------------------------------------------------------------
 //GTM32 Boards - vscode: default_envs = STM32F103VE_GTM32 in platformio.ini
 
-//#define GTA30       // A30  & Variants - no touchscreen support
-//#define GTA30M      // A30M & Variants - no touchscreen support
-//#define GTA30C      // A30C & Variants - no touchscreen support
-//#define GTA30T      // A30T & Variants - no touchscreen support
-//#define GTA30CT     // A30CT & Variants - no touchscreen support
-//#define GTE180      // E180 & Variants - no touchscreen support
-//#define GTM201      // M201 & Variants - no touchscreen support
-//#define GTD200      // D200 & Variants - no touchscreen support
+//#define GTA30       // A30  & Variants - no touchscreen support, for development only
+//#define GTA30M      // A30M & Variants - no touchscreen support, for development only
+//#define GTA30C      // A30C & Variants - no touchscreen support, for development only
+//#define GTA30T      // A30T & Variants - no touchscreen support, for development only
+//#define GTA30CT     // A30CT & Variants - no touchscreen support, for development only
+//#define GTE180      // E180 & Variants - no touchscreen support, for development only
+//#define GTM201      // M201 & Variants - no touchscreen support, for development only
+//#define GTD200      // D200 & Variants - no touchscreen support, for development only
 
   #if ENABLED (GTA30M)
     #define GTA30
