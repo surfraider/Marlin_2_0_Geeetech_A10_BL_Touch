@@ -43,7 +43,6 @@
   #define USES_LIQUIDCRYSTAL
 #elif ENABLED (YHCB2004) 
   #define USES_YHCB2004
-  #define YHCB2004_DEP 
 #endif
 
 #if SAVED_POSITIONS
