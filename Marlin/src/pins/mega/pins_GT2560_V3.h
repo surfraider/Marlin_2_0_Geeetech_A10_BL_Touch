@@ -174,10 +174,10 @@
 
 #if IS_NEWPANEL
   #ifndef BTN_EN1
-    #define BTN_EN1                           16  //42
+    #define BTN_EN1                           42
   #endif
   #ifndef BTN_EN2
-    #define BTN_EN2                           17  //40
+    #define BTN_EN2                           40
   #endif
   #ifndef BTN_ENC
     #define BTN_ENC                           19
