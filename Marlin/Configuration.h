@@ -2998,6 +2998,7 @@
  #elif ENABLED (NEWMODEL) // Screen type & SDcard support
   //#define REPRAP_DISCOUNT_SMART_CONTROLLER
   //#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+  //#define ULTIPANEL
  #elif ANY (ENDER3, CR10DISPLAY)
    #define CR10_STOCKDISPLAY
  #else //A10 - I3pro
