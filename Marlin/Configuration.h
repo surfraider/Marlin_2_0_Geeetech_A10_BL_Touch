@@ -82,6 +82,7 @@
 //GT2560 Boards - vscode: default_envs = mega2560 in platformio.ini
 
 //#define GTA10       // A10 & Variants
+//#define GTA10PRO    // A10 Pro Variants - in development
 //#define GTA10M      // A10M & Variants
 //#define GTA10C      // A10C & Variants
 //#define GTA10T      // A10T & Variants
@@ -103,6 +104,11 @@
     #define MIX
   #endif
   
+  #if ENABLED (GTA10PRO)
+    #define GTA10
+    #define YHCB2004 // A10 Pro  Screen  
+  #endif
+
   #if ENABLED (GTA10T)
     #define GTA10
     #define MIXT
@@ -2989,7 +2995,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-#if DISABLED (NOSCREEN)
+#if DISABLED (NOSCREEN) && DISABLED (GTA10PRO)
   #if ANY (GTA20, FULLGFXLCD)
     #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
     #define ST7920_DELAY_1 DELAY_NS(200)
@@ -3003,7 +3009,6 @@
    #define CR10_STOCKDISPLAY
  #else //A10 - I3pro
   #define REPRAP_DISCOUNT_SMART_CONTROLLER
-  //#define ULTIPANEL
   #endif
 #endif
 
