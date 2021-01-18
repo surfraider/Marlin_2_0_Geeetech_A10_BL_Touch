@@ -107,9 +107,6 @@
   #if ENABLED (GTA10PRO)
     #define GTA10
     #define YHCB2004 // A10 Pro  Screen    
-    #define BTN_EN1          16 
-    #define BTN_EN2          17
-    #define BTN_ENC          19
   #endif
 
   #if ENABLED (GTA10T)
