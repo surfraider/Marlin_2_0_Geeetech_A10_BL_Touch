@@ -3002,6 +3002,7 @@
    #define CR10_STOCKDISPLAY
  #else //A10 - I3pro
   #define REPRAP_DISCOUNT_SMART_CONTROLLER
+  //#define ULTIPANEL
   #endif
 #endif
 
