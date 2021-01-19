@@ -153,6 +153,14 @@
 //
 #define BEEPER_PIN                            18
 
+#if USES_NEWA20SCREEN
+  #define LCD_PINS_RS         5   //20 [rs]
+  #define LCD_PINS_ENABLE    36   // 6 //17
+  #define LCD_PINS_D4        21   //16
+  #define LCD_PINS_D5        21
+  #define LCD_PINS_D6         5
+  #define LCD_PINS_D7         6
+#else
 #ifndef LCD_PINS_RS
   #define LCD_PINS_RS                         20
 #endif
@@ -170,6 +178,7 @@
 #endif
 #ifndef LCD_PINS_D7
   #define LCD_PINS_D7                         36
+  #endif
 #endif
 
 #if IS_NEWPANEL
