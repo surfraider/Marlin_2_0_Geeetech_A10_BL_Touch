@@ -83,6 +83,10 @@
 
 //#define GTA10       // A10 & Variants
 //#define GTA10PRO    // A10 Pro Variants - in development
+//#define GTA10MPRO   // A10M Pro Variants - in development
+//#define GTA10CPRO   // A10C Pro Variants - in development
+//#define GTA10TPRO   // A10T Pro Variants - in development
+//#define GTA10CRPRO  // A10CT Pro Variants - in development
 //#define GTA10M      // A10M & Variants
 //#define GTA10C      // A10C & Variants
 //#define GTA10T      // A10T & Variants
@@ -106,6 +110,34 @@
   
   #if ENABLED (GTA10PRO)
     #define GTA10
+    #define YHCB2004 // A10 Pro  Screen 
+    #define ULTIPANEL
+  #endif
+
+ #if ENABLED (GTA10MPRO)
+    #define GTA10
+    #define MIX
+    #define YHCB2004 // A10 Pro  Screen 
+    #define ULTIPANEL
+  #endif
+
+ #if ENABLED (GTA10CPRO)
+    #define GTA10
+    #define CYCLOPS
+    #define YHCB2004 // A10 Pro  Screen 
+    #define ULTIPANEL
+  #endif
+
+ #if ENABLED (GTA10TPRO)
+    #define GTA10
+    #define MIXT
+    #define YHCB2004 // A10 Pro  Screen 
+    #define ULTIPANEL
+  #endif
+
+ #if ENABLED (GTA10CTPRO)
+    #define GTA10
+    #define CYCLOPST
     #define YHCB2004 // A10 Pro  Screen 
     #define ULTIPANEL
   #endif
@@ -528,7 +560,7 @@
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 #if ANY (CYCLOPS, CYCLOPST)
   #define SINGLENOZZLE
-  //#define SINGLENOZZLE_STANDBY_TEMP
+  //#define SINGLENOZZLE_STANDBY_TEMP // causes compile error check again later
   //#define SINGLENOZZLE_STANDBY_FAN
 #endif
 
