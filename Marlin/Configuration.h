@@ -82,7 +82,7 @@
 //GT2560 Boards - vscode: default_envs = mega2560 in platformio.ini
 
 //#define GTA10       // A10 & Variants
-//#define GTA10PRO    // A10 Pro Variants - in development
+#define GTA10PRO    // A10 Pro Variants - in development
 //#define GTA10M      // A10M & Variants
 //#define GTA10C      // A10C & Variants
 //#define GTA10T      // A10T & Variants
@@ -106,7 +106,9 @@
   
   #if ENABLED (GTA10PRO)
     #define GTA10
-    #define YHCB2004 // A10 Pro  Screen    
+    #define YHCB2004 // A10 Pro  Screen 
+    //#define ULTIPANEL
+    //#define NEWPANEL   
   #endif
 
   #if ENABLED (GTA10T)
@@ -527,7 +529,7 @@
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 #if ANY (CYCLOPS, CYCLOPST)
   #define SINGLENOZZLE
-    #define SINGLENOZZLE_STANDBY_TEMP
+  //#define SINGLENOZZLE_STANDBY_TEMP
   //#define SINGLENOZZLE_STANDBY_FAN
 #endif
 
@@ -1623,6 +1625,12 @@
 //#define FIX_MOUNTED_PROBE
 
 /**
+ * Use the nozzle as the probe, with the hotend
+ * assembly attached to a sensitive strain gauge.
+ */
+//#define STRAIN_GAUGE_PROBE
+
+/**
  * Use the nozzle as the probe, as with a conductive
  * nozzle system or a piezo-electric smart effector.
  */
@@ -2122,7 +2130,7 @@
    #define NUM_RUNOUT_SENSORS   3
    #define FIL_RUNOUT_PIN      66
    #define FIL_RUNOUT2_PIN     67
-   #define FIL_RUNOUT3_PIN     68
+   #define FIL_RUNOUT3_PIN     54
    #elif ANY (MIX, CYCLOPS, DUELEX) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
    #define NUM_RUNOUT_SENSORS   2
    #define FIL_RUNOUT_PIN      66
@@ -2861,7 +2869,8 @@
 //
 // ULTIPANEL as seen on Thingiverse.
 //
-//#define ULTIPANEL
+//#define ULTRA_LCD
+
 
 //
 // PanelOne from T3P3 (via RAMPS 1.4 AUX2/AUX3)

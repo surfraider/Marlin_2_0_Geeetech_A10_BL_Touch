@@ -93,8 +93,7 @@
 #elif ENABLED(YHCB2004)
 
   #include <LiquidCrystal_AIP31068_SPI.h>
-  #define LCD_CLASS LiquidCrystal_AIP31068_SPI
-  LCD_CLASS lcd(5, 20, 4, 21, 36);//LCD spi ss pin, lcd cols, lcd rows, lcd sclk pin, lcd mosi pin, lcd miso pin  	
+  #define LCD_CLASS LiquidCrystal_AIP31068_SPI 	
 
 #else
 
