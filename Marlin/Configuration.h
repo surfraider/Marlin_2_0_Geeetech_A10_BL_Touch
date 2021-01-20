@@ -247,7 +247,7 @@
 
 //(Probe Mod) enable 1 (Mod) probe type none = manual (stock) - No GTM32 probe support yet
 
-#define TOUCHPROBE  // Enable Touch Type Probe (Bltouch / 3Dtouch)
+//#define TOUCHPROBE  // Enable Touch Type Probe (Bltouch / 3Dtouch)
 //#define FMP         // Enable Fixed Mounted Type Probe (Capacitive / Inductive)
 //#define PINDA       // Enable Pinda Type Probe
 
