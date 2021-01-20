@@ -39,7 +39,7 @@
 #define TXD         DIO1
 
 // SPI
-#if 
+#if USES_YHCB2004 
   #define SCK         5
   #define MISO        21
   #define MOSI        36

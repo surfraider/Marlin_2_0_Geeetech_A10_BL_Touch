@@ -82,7 +82,7 @@
 //GT2560 Boards - vscode: default_envs = mega2560 in platformio.ini
 
 //#define GTA10       // A10 & Variants
-#define GTA10PRO    // A10 Pro Variants - in development
+//#define GTA10PRO    // A10 Pro Variants - in development
 //#define GTA10M      // A10M & Variants
 //#define GTA10C      // A10C & Variants
 //#define GTA10T      // A10T & Variants
