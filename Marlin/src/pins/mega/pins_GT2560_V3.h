@@ -22,7 +22,7 @@
 #pragma once
 
 /**
- * GT2560 RevB + GT2560 V3.0 + GT2560 V3.1 + GT2560 V4.0 pin assignment
+ * GT2560 RevB + GT2560 V3.0 + GT2560 V3.1 + GT2560 V4.0 + GT2560 V4.1 pin assignment
  */
 
 #if NOT_TARGET(__AVR_ATmega1280__, __AVR_ATmega2560__)
