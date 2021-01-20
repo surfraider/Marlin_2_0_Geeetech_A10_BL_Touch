@@ -3481,16 +3481,16 @@
 #elif ENABLED (PROBE_MANUALLY)
 
   #define USER_DESC_1 "Manual UBL Slot 0" //Use nozzle & paper to setup UBL
-  #define USER_GCODE_1 "G28/nG29 P4 R255\nG29 S0\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 0"
+  #define USER_GCODE_1 "G28\nG29 P4\nG29 S0\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 0"
 
   #define USER_DESC_2 "Manual UBL Slot 1" //Use nozzle & paper to setup UBL
-  #define USER_GCODE_2 "G28/nG29 P4 R255\nG29 S1\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 1"
+  #define USER_GCODE_2 "G28\nG29 P4\nG29 S1\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 1"
 
   #define USER_DESC_3 "Manual UBL slot 2" //Use nozzle & paper to setup UBL
-  #define USER_GCODE_3 "G28/nG29 P4 R255\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 2"
+  #define USER_GCODE_3 "G28\nG29 P4\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 2"
 
   #define USER_DESC_4 "Adjust Point Near" //Adjust nearest mesh point
-  #define USER_GCODE_4 "G29 P4\nM500"
+  #define USER_GCODE_4 "G29 P4 R1\nM500"
 
   #define USER_DESC_5 "PIDtune Hotend"
   #define USER_GCODE_5 "M303 U1 E0 S250 C8\nM500"
@@ -3540,16 +3540,16 @@
   #define USER_GCODE_3 "G28\nM190 S65\nG29 P1\nG29 P3\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 2"
 
   #define USER_DESC_4 "Manual UBL Slot 0" //Use nozzle & paper to setup UBL
-  #define USER_GCODE_4 "G28/nG29 P4 R255\nG29 S0\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 0"
+  #define USER_GCODE_4 "G28\nG29 P4\nG29 S0\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 0"
 
   #define USER_DESC_5 "Manual UBL Slot 1" //Use nozzle & paper to setup UBL
-  #define USER_GCODE_5 "G28/nG29 P4 R255\nG29 S1\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 1"
+  #define USER_GCODE_5 "G28\nG29 P4\nG29 S1\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 1"
 
   #define USER_DESC_6 "Manual UBL slot 2" //Use nozzle & paper to setup UBL
-  #define USER_GCODE_6 "G28/nG29 P4 R255\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 2"
+  #define USER_GCODE_6 "G28\nG29 P4\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 2"
 
   #define USER_DESC_7 "Adjust Point Near" //Adjust nearest mesh point
-  #define USER_GCODE_7 "G29 P4\nM500"
+  #define USER_GCODE_7 "G29 P4 R1\nM500"
 
   #define USER_DESC_8 "Mesh Tilt" //Tilt mesh to account for changes of knobs under the bed
   #define USER_GCODE_8 "G29 J2\nM500"
