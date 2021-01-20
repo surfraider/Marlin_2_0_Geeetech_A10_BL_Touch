@@ -142,7 +142,10 @@
 #define SDSS                                  53
 #define LED_PIN                               13  // Use 6 (case light) for external LED. 13 is internal (yellow) LED.
 #define PS_ON_PIN                             12
-#define SUICIDE_PIN                           54  // This pin must be enabled at boot to keep power flowing
+
+#if NUM_RUNOUT_SENSORS < 3
+  #define SUICIDE_PIN                           54  // This pin must be enabled at boot to keep power flowing
+#endif
 
 #ifndef CASE_LIGHT_PIN
   #define CASE_LIGHT_PIN                       6  // 21
@@ -192,5 +195,4 @@
   #ifndef BTN_ENC
     #define BTN_ENC                           19
   #endif
-
 #endif
