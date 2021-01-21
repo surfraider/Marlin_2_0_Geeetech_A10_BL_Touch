@@ -82,15 +82,16 @@
 //GT2560 Boards - vscode: default_envs = mega2560 in platformio.ini
 
 //#define GTA10       // A10 & Variants
+//#define GTA10D      // A10D & Variants
+//#define GTA10M      // A10M & Variants
+//#define GTA10C      // A10C & Variants
+//#define GTA10T      // A10T & Variants
+//#define GTA10CT     // A10CT & Variants
 //#define GTA10PRO    // A10 Pro Variants - in development
 //#define GTA10MPRO   // A10M Pro Variants - in development
 //#define GTA10CPRO   // A10C Pro Variants - in development
 //#define GTA10TPRO   // A10T Pro Variants - in development
 //#define GTA10CRPRO  // A10CT Pro Variants - in development
-//#define GTA10M      // A10M & Variants
-//#define GTA10C      // A10C & Variants
-//#define GTA10T      // A10T & Variants
-//#define GTA10CT     // A10CT & Variants
 //#define GTA20       // A20 & Variants
 //#define GTA20M      // A20M & Variants
 //#define GTA20C      // A20C & Variants
@@ -102,6 +103,11 @@
 //#define I3PROC      // I3PROC & Variants
 //#define I3PROW      // I3PROW & Variants
 //#define I3PROX      // I3PROX & Variants
+
+  #if ENABLED (GTA10D)
+    #define GTA10
+    #define DUALEX
+  #endif
 
   #if ENABLED (GTA10M)
     #define GTA10
