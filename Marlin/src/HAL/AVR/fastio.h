@@ -111,7 +111,7 @@
 #define IS_INPUT(IO)          _IS_INPUT(IO)
 #define IS_OUTPUT(IO)         _IS_OUTPUT(IO)
 
-#define OUT_WRITE(IO,V)       do{ SET_OUTPUT(IO); WRITE(IO,V); }while(0)
+#define OUT_WRITE(IO,V)       ;do{ SET_OUTPUT(IO); WRITE(IO,V); }while(0)
 
 /**
  * Timer and Interrupt Control
