@@ -273,7 +273,7 @@
 //#define MIXT     // Enable Mixing T   3 in 1 - 1 Virtual Extruder
 //#define CYCLOPST // Enable Cyclops T  3 in 1 - 3 Physical Extruder
 
-//Intended for use with D variants
+//Intended for use with D variants do not combine with any other multi extruder options
 //#define DUALEX   // 2 Extruders       2 in 2 - 2 Physical Extruder & 2 Nozzles
 
 //(Driver Mods) enable 1 (MOD) driver type or none for (Stock/A4988)
