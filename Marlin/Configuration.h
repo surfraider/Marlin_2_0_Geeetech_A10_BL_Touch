@@ -1,4 +1,4 @@
-/**
+ /**
  * Marlin 3D Printer Firmware
  * Copyright (c) 2020 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
  *
@@ -72,7 +72,7 @@
 // Author info of this build printed to the host during boot and M115
 #define STRING_CONFIG_H_AUTHOR "(Vertabreaker)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
-#define SHORT_BUILD_VERSION "Bugfix Build 502"
+#define SHORT_BUILD_VERSION "Bugfix Build 501"
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -81,17 +81,11 @@
 //-------------------------------
 //GT2560 Boards - vscode: default_envs = mega2560 in platformio.ini
 
-//#define GTA10       // A10 & Variants
-//#define GTA10D      // A10D & Variants
+#define GTA10       // A10 & Variants
 //#define GTA10M      // A10M & Variants
 //#define GTA10C      // A10C & Variants
 //#define GTA10T      // A10T & Variants
 //#define GTA10CT     // A10CT & Variants
-//#define GTA10PRO    // A10 Pro Variants - in development
-//#define GTA10MPRO   // A10M Pro Variants - in development
-//#define GTA10CPRO   // A10C Pro Variants - in development
-//#define GTA10TPRO   // A10T Pro Variants - in development
-//#define GTA10CRPRO  // A10CT Pro Variants - in development
 //#define GTA20       // A20 & Variants
 //#define GTA20M      // A20M & Variants
 //#define GTA20C      // A20C & Variants
@@ -104,50 +98,11 @@
 //#define I3PROW      // I3PROW & Variants
 //#define I3PROX      // I3PROX & Variants
 
-  #if ENABLED (GTA10D)
-    #define GTA10
-    #define DUALEX
-  #endif
-
   #if ENABLED (GTA10M)
     #define GTA10
     #define MIX
   #endif
   
-  #if ENABLED (GTA10PRO)
-    #define GTA10
-    #define YHCB2004 // A10 Pro  Screen 
-    #define ULTIPANEL
-  #endif
-
- #if ENABLED (GTA10MPRO)
-    #define GTA10
-    #define MIX
-    #define YHCB2004 // A10 Pro  Screen 
-    #define ULTIPANEL
-  #endif
-
- #if ENABLED (GTA10CPRO)
-    #define GTA10
-    #define CYCLOPS
-    #define YHCB2004 // A10 Pro  Screen 
-    #define ULTIPANEL
-  #endif
-
- #if ENABLED (GTA10TPRO)
-    #define GTA10
-    #define MIXT
-    #define YHCB2004 // A10 Pro  Screen 
-    #define ULTIPANEL
-  #endif
-
- #if ENABLED (GTA10CTPRO)
-    #define GTA10
-    #define CYCLOPST
-    #define YHCB2004 // A10 Pro  Screen 
-    #define ULTIPANEL
-  #endif
-
   #if ENABLED (GTA10T)
     #define GTA10
     #define MIXT
@@ -253,7 +208,7 @@
 
 //(Probe Mod) enable 1 (Mod) probe type none = manual (stock) - No GTM32 probe support yet
 
-//#define TOUCHPROBE  // Enable Touch Type Probe (Bltouch / 3Dtouch)
+#define TOUCHPROBE  // Enable Touch Type Probe (Bltouch / 3Dtouch)
 //#define FMP         // Enable Fixed Mounted Type Probe (Capacitive / Inductive)
 //#define PINDA       // Enable Pinda Type Probe
 
@@ -273,7 +228,7 @@
 //#define MIXT     // Enable Mixing T   3 in 1 - 1 Virtual Extruder
 //#define CYCLOPST // Enable Cyclops T  3 in 1 - 3 Physical Extruder
 
-//Intended for use with D variants do not combine with any other multi extruder options
+//Intended for use with D variants
 //#define DUALEX   // 2 Extruders       2 in 2 - 2 Physical Extruder & 2 Nozzles
 
 //(Driver Mods) enable 1 (MOD) driver type or none for (Stock/A4988)
@@ -348,8 +303,8 @@
 
 //Optional features
 
-//#define PLR              // Enabled power loss resume - Only functions from SDcard
-//#define RUNOUT           // Enable filament runout sensor - Only If you have them and want to use them
+#define PLR              // Enabled power loss resume - Only functions from SDcard
+#define RUNOUT           // Enable filament runout sensor - Only If you have them and want to use them
 //#define BEDCLIPS         // Enable to avoid bed clips (manual or probe) - Only If you have them and want to use them
 //#define CASELIGHT        // Enable case light menu if board has led header.
 //#define LINADV           // Enable linear advance.
@@ -427,7 +382,7 @@
 
 //Motor direction logic - Not used if CUSTOMDRIVERS enabled
 #if ENABLED (TMCCHIPS) && DISABLED (MULTIEXTRUDER) || DISABLED (TMCCHIPS) && ENABLED (MULTIEXTRUDER)
-  #define INVERTE     // (E direction False) comment out to disabe if wrong direction for (E direction true) - Geared exturders invert E (stock)
+  //#define INVERTE     // (E direction False) comment out to disabe if wrong direction for (E direction true) - Geared exturders invert E (stock)
 #else
   //#define INVERTE  // Enable to force on if the above condition is not matched.
 #endif 
@@ -566,7 +521,7 @@
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
 #if ANY (CYCLOPS, CYCLOPST)
   #define SINGLENOZZLE
-  //#define SINGLENOZZLE_STANDBY_TEMP // causes compile error check again later
+    #define SINGLENOZZLE_STANDBY_TEMP
   //#define SINGLENOZZLE_STANDBY_FAN
 #endif
 
@@ -1662,12 +1617,6 @@
 //#define FIX_MOUNTED_PROBE
 
 /**
- * Use the nozzle as the probe, with the hotend
- * assembly attached to a sensitive strain gauge.
- */
-//#define STRAIN_GAUGE_PROBE
-
-/**
  * Use the nozzle as the probe, as with a conductive
  * nozzle system or a piezo-electric smart effector.
  */
@@ -1906,7 +1855,7 @@
 //#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
 #endif
 
-// Require minimum nozzle and/or bed temperature for probing
+// Require minimum nozzle and/or bed temperature for probing.
 //#define PREHEAT_BEFORE_PROBING
 #if ENABLED(PREHEAT_BEFORE_PROBING)
   #define PROBING_NOZZLE_TEMP 120   // (°C) Only applies to E0 at this time
@@ -2097,12 +2046,12 @@
 #endif
 
 #if  ANY (GTA10, GTA20, GTA30) && ANY(MIXT, CYCLOPST, CYCLOPST)
-  #define X_MIN_POS -1   //- this is what it is on my test machines yours could differ
+  #define X_MIN_POS -7  //- this is what it is on my test machines yours could differ
   #define Y_MIN_POS -7   //- this is what it is on my test machines yours could differ
 #elif ANY (GTA10, GTA20, GTA30)
-  #define X_MIN_POS -10  //- this is what it is on my test machines yours could differ
-  #define Y_MIN_POS -5   //- this is what it is on my test machines yours could differ
-#elif ANY (BEAR, BEAR_TURBO)
+  #define X_MIN_POS -10 //- this is what it is on my test machines yours could differ
+  #define Y_MIN_POS -9  //- this is what it is on my test machines yours could differ
+/*#elif ANY (BEAR, BEAR_TURBO)
   #define X_MIN_POS 0
   #define Y_MIN_POS -4  
 #elif ENABLED (NEWMODEL) 
@@ -2110,8 +2059,9 @@
   #define Y_MIN_POS 0  
 #else
   #define X_MIN_POS 0        
-  #define Y_MIN_POS 0      
+  #define Y_MIN_POS 0      */
 #endif
+
 
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
@@ -2167,7 +2117,7 @@
    #define NUM_RUNOUT_SENSORS   3
    #define FIL_RUNOUT_PIN      66
    #define FIL_RUNOUT2_PIN     67
-   #define FIL_RUNOUT3_PIN     54
+   #define FIL_RUNOUT3_PIN     68
    #elif ANY (MIX, CYCLOPS, DUELEX) && DISABLED (BEAR) && DISABLED (BEAR_TURBO)
    #define NUM_RUNOUT_SENSORS   2
    #define FIL_RUNOUT_PIN      66
@@ -2253,17 +2203,17 @@
  *   of other systems. UBL also includes integrated Mesh Generation, Mesh
  *   Validation and Mesh Editing systems.
  */
-#if DISABLED (AT1280)
+//#if DISABLED (AT1280)
   #define AUTO_BED_LEVELING_UBL
-#else  
-  #define AUTO_BED_LEVELING_BILINEAR  
-#endif
+//#else  
+// #define AUTO_BED_LEVELING_BILINEAR  
+//#endif
 
-#if ENABLED (AUTO_BED_LEVELING_UBL)
-  #define GRIDSIZE 5   // Mesh grid size adjust as needed
-#elif ENABLED (AUTO_BED_LEVELING_BILINEAR)
-  #define GRIDSIZE 3   // Mesh grid size adjust as needed
-#endif
+//#if ENABLED (AUTO_BED_LEVELING_UBL)
+  #define GRIDSIZE 7   // Mesh grid size adjust as needed
+//#elif ENABLED (AUTO_BED_LEVELING_BILINEAR)
+//  #define GRIDSIZE 3   // Mesh grid size adjust as needed
+//#endif
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable one of
@@ -2407,25 +2357,6 @@
     #define LEVEL_CORNERS_VERIFY_RAISED   // After adjustment triggers the probe, re-probe to verify
     //#define LEVEL_CORNERS_AUDIO_FEEDBACK
   #endif
-
-  /**
-   * Corner Leveling Order
-   *
-   * Set 2 or 4 points. When 2 points are given, the 3rd is the center of the opposite edge.
-   *
-   *  LF  Left-Front    RF  Right-Front
-   *  LB  Left-Back     RB  Right-Back
-   *
-   * Examples:
-   *
-   *      Default        {LF,RB,LB,RF}         {LF,RF}           {LB,LF}
-   *  LB --------- RB   LB --------- RB    LB --------- RB   LB --------- RB
-   *  |  4       3  |   | 3         2 |    |     <3>     |   | 1           |
-   *  |             |   |             |    |             |   |          <3>|
-   *  |  1       2  |   | 1         4 |    | 1         2 |   | 2           |
-   *  LF --------- RF   LF --------- RF    LF --------- RF   LF --------- RF
-   */
-  #define LEVEL_CORNERS_LEVELING_ORDER { LF, RF, RB, LB }
 #endif
 #endif
 
@@ -2737,9 +2668,9 @@
  * Select the language to display on the LCD. These languages are available:
  *
  *   en, an, bg, ca, cz, da, de, el, el_gr, es, eu, fi, fr, gl, hr, hu, it,
- *   jp_kana, ko_KR, nl, pl, pt, pt_br, ro, ru, sk, sv, tr, uk, vi, zh_CN, zh_TW
+ *   jp_kana, ko_KR, nl, pl, pt, pt_br, ro ru, sk, tr, uk, vi, zh_CN, zh_TW, test
  *
- * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek', 'el_gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'hu':'Hungarian', 'it':'Italian', 'jp_kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt_br':'Portuguese (Brazilian)', 'ro':'Romanian', 'ru':'Russian', 'sk':'Slovak', 'sv':'Swedish', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)' }
+ * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek', 'el_gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'hu':'Hungarian', 'it':'Italian', 'jp_kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt_br':'Portuguese (Brazilian)', 'ro':'Romanian', 'ru':'Russian', 'sk':'Slovak', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)', 'test':'TEST' }
  */
 #define LCD_LANGUAGE en
 
@@ -2786,6 +2717,16 @@
   #define SDIO_SUPPORT
 #endif
 #endif
+
+/**
+ * SD CARD: SPI SPEED
+ *
+ * Enable one of the following items for a slower SPI transfer speed.
+ * This may be required to resolve "volume init" errors.
+ */
+//#define SPI_SPEED SPI_HALF_SPEED
+//#define SPI_SPEED SPI_QUARTER_SPEED
+//#define SPI_SPEED SPI_EIGHTH_SPEED
 
 /**
  * SD CARD: ENABLE CRC
@@ -2906,8 +2847,7 @@
 //
 // ULTIPANEL as seen on Thingiverse.
 //
-//#define ULTRA_LCD
-
+//#define ULTIPANEL
 
 //
 // PanelOne from T3P3 (via RAMPS 1.4 AUX2/AUX3)
@@ -3041,7 +2981,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-#if DISABLED (NOSCREEN) && DISABLED (GTA10PRO)
+#if DISABLED (NOSCREEN)
   #if ANY (GTA20, FULLGFXLCD)
     #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
     #define ST7920_DELAY_1 DELAY_NS(200)
@@ -3050,7 +2990,6 @@
  #elif ENABLED (NEWMODEL) // Screen type & SDcard support
   //#define REPRAP_DISCOUNT_SMART_CONTROLLER
   //#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
-  //#define ULTIPANEL
  #elif ANY (ENDER3, CR10DISPLAY)
    #define CR10_STOCKDISPLAY
  #else //A10 - I3pro
@@ -3379,10 +3318,6 @@
 //#define TFT_COLOR_UI
 //#define TFT_LVGL_UI
 
-#if ENABLED(TFT_LVGL_UI)
-  //#define MKS_WIFI_MODULE  // MKS WiFi module
-#endif
-
 /**
  * TFT Rotation. Set to one of the following values:
  *
@@ -3416,7 +3351,7 @@
   //#define TOUCH_CALIBRATION_Y -8981
   //#define TOUCH_OFFSET_X        -43
   //#define TOUCH_OFFSET_Y        257
-  //#define TOUCH_ORIENTATION TOUCH_LANDSCAPE
+  //#define TOUCH_ORIENTATION   TOUCH_LANDSCAPE
 
   #if ENABLED(TFT_COLOR_UI)
     //#define SINGLE_TOUCH_NAVIGATION

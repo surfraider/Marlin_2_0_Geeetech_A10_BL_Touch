@@ -561,7 +561,7 @@
 
 //#define X_DUAL_STEPPER_DRIVERS
 #if ENABLED(X_DUAL_STEPPER_DRIVERS)
-  //#define INVERT_X2_VS_X_DIR    // Enable if X2 direction signal is opposite to X
+  #define INVERT_X2_VS_X_DIR true   // Set 'true' if X motors should rotate in opposite directions
   //#define X_DUAL_ENDSTOPS
   #if ENABLED(X_DUAL_ENDSTOPS)
     #define X2_USE_ENDSTOP _XMAX_
@@ -571,7 +571,7 @@
 
 //#define Y_DUAL_STEPPER_DRIVERS
 #if ENABLED(Y_DUAL_STEPPER_DRIVERS)
-  //#define INVERT_Y2_VS_Y_DIR   // Enable if Y2 direction signal is opposite to Y
+  #define INVERT_Y2_VS_Y_DIR true   // Set 'true' if Y motors should rotate in opposite directions
   //#define Y_DUAL_ENDSTOPS
   #if ENABLED(Y_DUAL_ENDSTOPS)
     #define Y2_USE_ENDSTOP _YMAX_
@@ -589,11 +589,6 @@
 #endif
 
 #if NUM_Z_STEPPER_DRIVERS > 1
-  // Enable if Z motor direction signals are the opposite of Z1
-  //#define INVERT_Z2_VS_Z_DIR
-  //#define INVERT_Z3_VS_Z_DIR
-  //#define INVERT_Z4_VS_Z_DIR
-
   //#define Z_MULTI_ENDSTOPS
   #if ENABLED(Z_MULTI_ENDSTOPS)
     #define Z2_USE_ENDSTOP          _XMAX_
@@ -848,8 +843,8 @@
   #define RESTORE_LEVELING_AFTER_G35    // Enable to restore leveling setup after operation
   //#define REPORT_TRAMMING_MM          // Report Z deviation (mm) for each point relative to the first
 
-  //#define ASSISTED_TRAMMING_WIZARD    // Add a Tramming Wizard to the LCD menu
-
+  //#define ASSISTED_TRAMMING_MENU_ITEM // Add a menu item to run G35 Assisted Tramming (MarlinUI)
+  //#define ASSISTED_TRAMMING_WIZARD    // Make the menu item open a Tramming Wizard sub-menu
   //#define ASSISTED_TRAMMING_WAIT_POSITION { X_CENTER, Y_CENTER, 30 } // Move the nozzle out of the way for adjustment
 
   /**
@@ -1210,16 +1205,6 @@
 #endif
 
 #if ENABLED(SDSUPPORT)
-  /**
-   * SD Card SPI Speed
-   * May be required to resolve "volume init" errors.
-   *
-   * Enable and set to SPI_HALF_SPEED, SPI_QUARTER_SPEED, or SPI_EIGHTH_SPEED
-   *  otherwise full speed will be applied.
-   *
-   * :['SPI_HALF_SPEED', 'SPI_QUARTER_SPEED', 'SPI_EIGHTH_SPEED']
-   */
-  //#define SD_SPI_SPEED SPI_HALF_SPEED
 
   // The standard SD detect circuit reads LOW when media is inserted and HIGH when empty.
   // Enable this option and set to HIGH if your SD cards are incorrectly detected.
@@ -1418,15 +1403,12 @@
    * Set this option to one of the following (or the board's defaults apply):
    *
    *           LCD - Use the SD drive in the external LCD controller.
-   *       ONBOARD - Use the SD drive on the control board.
+   *       ONBOARD - Use the SD drive on the control board. (No SD_DETECT_PIN. M21 to init.)
    *  CUSTOM_CABLE - Use a custom cable to access the SD (as defined in a pins file).
    *
    * :[ 'LCD', 'ONBOARD', 'CUSTOM_CABLE' ]
    */
   //#define SDCARD_CONNECTION LCD
-
-  // Enable if SD detect is rendered useless (e.g., by using an SD extender)
-  //#define NO_SD_DETECT
 
 #endif // SDSUPPORT
 
@@ -1560,16 +1542,6 @@
 #endif // HAS_DGUS_LCD
 
 //
-// Specify additional languages for the UI. Default specified by LCD_LANGUAGE.
-//
-#if EITHER(DOGLCD, TOUCH_UI_FTDI_EVE)
-  //#define LCD_LANGUAGE_2 fr
-  //#define LCD_LANGUAGE_3 de
-  //#define LCD_LANGUAGE_4 es
-  //#define LCD_LANGUAGE_5 it
-#endif
-
-//
 // Touch UI for the FTDI Embedded Video Engine (EVE)
 //
 #if ENABLED(TOUCH_UI_FTDI_EVE)
@@ -1642,6 +1614,13 @@
 
   // Use a smaller font when labels don't fit buttons
   #define TOUCH_UI_FIT_TEXT
+
+  // Allow language selection from menu at run-time (otherwise use LCD_LANGUAGE)
+  //#define LCD_LANGUAGE_1 en
+  //#define LCD_LANGUAGE_2 fr
+  //#define LCD_LANGUAGE_3 de
+  //#define LCD_LANGUAGE_4 es
+  //#define LCD_LANGUAGE_5 it
 
   // Use a numeric passcode for "Screen lock" keypad.
   // (recommended for smaller displays)
@@ -1793,10 +1772,10 @@
  * the probe to be unable to reach any points.
  */
 #if PROBE_SELECTED && !IS_KINEMATIC
-  //#define PROBING_MARGIN_LEFT PROBING_MARGIN
-  //#define PROBING_MARGIN_RIGHT PROBING_MARGIN
-  //#define PROBING_MARGIN_FRONT PROBING_MARGIN
-  //#define PROBING_MARGIN_BACK PROBING_MARGIN
+  #define PROBING_MARGIN_LEFT PROBING_MARGIN
+  #define PROBING_MARGIN_RIGHT PROBING_MARGIN
+  #define PROBING_MARGIN_FRONT PROBING_MARGIN
+  #define PROBING_MARGIN_BACK PROBING_MARGIN
 #endif
 
 #if EITHER(MESH_BED_LEVELING, AUTO_BED_LEVELING_UBL)
@@ -3139,10 +3118,6 @@
     #define SPEED_POWER_MAX             100    // (%) 0-100
     #define SPEED_POWER_STARTUP          80    // (%) M3/M4 speed/power default (with no arguments)
 
-    // Define the minimum and maximum test pulse time values for a laser test fire function
-    #define LASER_TEST_PULSE_MIN           1   // Used with Laser Control Menu
-    #define LASER_TEST_PULSE_MAX         999   // Caution: Menu may not show more than 3 characters
-
     /**
      * Enable inline laser power to be handled in the planner / stepper routines.
      * Inline power is specified by the I (inline) flag in an M3 command (e.g., M3 S20 I)
@@ -3484,16 +3459,16 @@
 #elif ENABLED (PROBE_MANUALLY)
 
   #define USER_DESC_1 "Manual UBL Slot 0" //Use nozzle & paper to setup UBL
-  #define USER_GCODE_1 "G28\nG29 P4\nG29 S0\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 0"
+  #define USER_GCODE_1 "G28/nG29 P4 R255\nG29 S0\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 0"
 
   #define USER_DESC_2 "Manual UBL Slot 1" //Use nozzle & paper to setup UBL
-  #define USER_GCODE_2 "G28\nG29 P4\nG29 S1\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 1"
+  #define USER_GCODE_2 "G28/nG29 P4 R255\nG29 S1\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 1"
 
   #define USER_DESC_3 "Manual UBL slot 2" //Use nozzle & paper to setup UBL
-  #define USER_GCODE_3 "G28\nG29 P4\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 2"
+  #define USER_GCODE_3 "G28/nG29 P4 R255\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 2"
 
   #define USER_DESC_4 "Adjust Point Near" //Adjust nearest mesh point
-  #define USER_GCODE_4 "G29 P4 R1\nM500"
+  #define USER_GCODE_4 "G29 P4\nM500"
 
   #define USER_DESC_5 "PIDtune Hotend"
   #define USER_GCODE_5 "M303 U1 E0 S250 C8\nM500"
@@ -3543,16 +3518,16 @@
   #define USER_GCODE_3 "G28\nM190 S65\nG29 P1\nG29 P3\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM140 S0\nM0 Mesh Saved in Slot 2"
 
   #define USER_DESC_4 "Manual UBL Slot 0" //Use nozzle & paper to setup UBL
-  #define USER_GCODE_4 "G28\nG29 P4\nG29 S0\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 0"
+  #define USER_GCODE_4 "G28/nG29 P4 R255\nG29 S0\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 0"
 
   #define USER_DESC_5 "Manual UBL Slot 1" //Use nozzle & paper to setup UBL
-  #define USER_GCODE_5 "G28\nG29 P4\nG29 S1\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 1"
+  #define USER_GCODE_5 "G28/nG29 P4 R255\nG29 S1\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 1"
 
   #define USER_DESC_6 "Manual UBL slot 2" //Use nozzle & paper to setup UBL
-  #define USER_GCODE_6 "G28\nG29 P4\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 2"
+  #define USER_GCODE_6 "G28/nG29 P4 R255\nG29 S2\nG29 A\nG29 F 10.0\nM500\nM0 Mesh Saved Slot 2"
 
   #define USER_DESC_7 "Adjust Point Near" //Adjust nearest mesh point
-  #define USER_GCODE_7 "G29 P4 R1\nM500"
+  #define USER_GCODE_7 "G29 P4\nM500"
 
   #define USER_DESC_8 "Mesh Tilt" //Tilt mesh to account for changes of knobs under the bed
   #define USER_GCODE_8 "G29 J2\nM500"
@@ -3845,7 +3820,10 @@
   //#define E_MUX2_PIN 44  // Needed for 5 to 8 inputs
 #elif HAS_PRUSA_MMU2
   // Serial port used for communication with MMU2.
+  // For AVR enable the UART port used for the MMU. (e.g., mmuSerial)
+  // For 32-bit boards check your HAL for available serial ports. (e.g., Serial2)
   #define MMU2_SERIAL_PORT 2
+  #define MMU2_SERIAL mmuSerial
 
   // Use hardware reset for MMU if a pin is defined for it
   //#define MMU2_RST_PIN 23
